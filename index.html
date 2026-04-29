@@ -8,7 +8,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&family=Space+Grotesk:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&family=Playfair+Display:ital,wght@1,600;1,700;1,800;1,900&family=Space+Grotesk:wght@400;700;900&display=swap" rel="stylesheet">
     
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -25,9 +25,17 @@
             --accent-glow: rgba(204, 255, 0, 0.15);
             --border-color: #222222;
             --danger: #ff4b4b;
+            
+            /* Novas Cores Neon para a tipografia Playfair */
+            --accent-cyan: #00e5ff;
+            --accent-pink: #ff4df8;
+            --accent-purple: #c471ed;
+            --accent-yellow: #ffd700;
 
-            /* Fonte principal em uso */
+            /* Fontes em uso */
             --font-body: 'Manrope', sans-serif;
+            --font-title: 'Space Grotesk', sans-serif;
+            --font-serif: 'Playfair Display', serif;
         }
 
         * {
@@ -55,8 +63,8 @@
             color: #000;
         }
 
-        h1, h2, h3, h4, h5, h6, .brand {
-            font-family: 'Space Grotesk', sans-serif;
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-title);
         }
 
         a {
@@ -71,17 +79,15 @@
         /* ================= GLOBAL TYPOGRAPHY ================= */
         .title-huge {
             font-size: clamp(3rem, 6vw, 5.5rem);
-            font-weight: 900;
-            line-height: 1.05;
-            letter-spacing: -0.03em;
+            font-weight: 800;
+            line-height: 1.1;
             margin-bottom: 1.5rem;
         }
 
         .title-section {
             font-size: clamp(2.5rem, 4vw, 3.5rem);
-            font-weight: 900;
-            line-height: 1.1;
-            letter-spacing: -0.02em;
+            font-weight: 800;
+            line-height: 1.15;
             margin-bottom: 1rem;
         }
 
@@ -94,12 +100,24 @@
 
         .highlight {
             color: var(--accent);
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-weight: 800;
+        }
+
+        .serif-italic {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-weight: 800;
         }
 
         .highlight-bg {
             background: linear-gradient(120deg, var(--accent) 0%, #99cc00 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-weight: 800;
         }
 
         /* ================= BUTTONS ================= */
@@ -115,7 +133,7 @@
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             border: none;
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: var(--font-title);
         }
 
         .btn-primary {
@@ -143,7 +161,7 @@
 
         /* ================= LAYOUT & SECTIONS ================= */
         .container {
-            max-width: 1200px;
+            max-width: 1440px;
             margin: 0 auto;
             padding: 0 1.5rem;
         }
@@ -177,9 +195,10 @@
         }
 
         .brand {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: 900;
-            letter-spacing: -0.05em;
+            font-family: var(--font-serif);
+            font-style: italic;
         }
 
         .brand span {
@@ -194,6 +213,7 @@
             font-weight: 600;
             font-size: 0.9rem;
             transition: all 0.3s ease;
+            font-family: var(--font-title);
         }
 
         .nav-btn:hover {
@@ -234,7 +254,7 @@
             font-size: 1rem;
             font-weight: 500;
             margin-bottom: 2rem;
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: var(--font-title);
         }
 
         .hero-actions {
@@ -244,60 +264,102 @@
             flex-wrap: wrap;
         }
 
-        /* ================= 2. CLIENTS MARQUEE ================= */
-        .clients {
-            padding: 3rem 0;
+        /* ================= 2. PORTFOLIO SCROLL (NEW) ================= */
+        .portfolio-section {
+            padding: 6rem 0 8rem 0;
+            background-color: var(--surface-color);
             border-top: 1px solid var(--border-color);
             border-bottom: 1px solid var(--border-color);
-            background-color: var(--surface-color);
             overflow: hidden;
-            position: relative;
         }
 
-        .clients p {
-            text-align: center;
+        .portfolio-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 2rem;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .portfolio-header h2 {
+            max-width: 600px;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            line-height: 1.1;
+            font-family: var(--font-title);
+        }
+
+        .portfolio-header p {
+            max-width: 350px;
             font-size: 0.9rem;
             text-transform: uppercase;
-            letter-spacing: 0.2em;
+            letter-spacing: 0.15em;
             color: var(--text-muted);
-            margin-bottom: 2rem;
+            font-weight: 700;
+            line-height: 1.6;
+            font-family: var(--font-body);
         }
 
-        .marquee-wrapper {
+        .portfolio-track-container {
             display: flex;
-            width: fit-content;
-            animation: scroll 30s linear infinite;
+            flex-direction: column;
+            gap: 1.5rem;
+            /* Faz o slider vazar para as bordas da tela ignorando o container */
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
         }
 
-        .marquee-wrapper:hover {
+        .portfolio-track {
+            display: flex;
+            gap: 1.5rem;
+            width: max-content;
+        }
+
+        .portfolio-track.scroll-right {
+            animation: scrollRight 40s linear infinite;
+        }
+
+        .portfolio-track.scroll-left {
+            animation: scrollLeft 40s linear infinite;
+        }
+
+        .portfolio-track:hover {
             animation-play-state: paused;
         }
 
-        .marquee-content {
-            display: flex;
-            gap: 4rem;
-            padding-right: 4rem;
-            align-items: center;
+        .portfolio-item {
+            width: clamp(280px, 25vw, 400px);
+            aspect-ratio: 16/10;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-color);
         }
 
-        .client-logo {
-            font-family: 'Space Grotesk', serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-muted);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: color 0.3s;
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
         }
 
-        .client-logo:hover {
-            color: var(--text-main);
+        .portfolio-item:hover img {
+            transform: scale(1.05);
         }
 
-        @keyframes scroll {
+        @keyframes scrollLeft {
             0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); } /* Scrolls exactly half of the duplicated content */
+            100% { transform: translateX(-50%); } /* Rola até a metade (onde as imagens se repetem) */
+        }
+
+        @keyframes scrollRight {
+            0% { transform: translateX(-50%); } /* Começa da metade */
+            100% { transform: translateX(0); } /* Vai para o começo (rolando para a direita) */
         }
 
         /* ================= 3. PROBLEM SECTION ================= */
@@ -332,9 +394,9 @@
         }
 
         .card h3 {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             margin-bottom: 1rem;
-            font-family: var(--font-body); /* Garante que o título do card mude com o teste */
+            font-family: var(--font-title);
             font-weight: 700;
         }
 
@@ -357,6 +419,12 @@
         .services-header .text-lead {
             margin-bottom: 0;
             max-width: 500px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
         }
 
         .service-card {
@@ -434,7 +502,7 @@
             color: #000;
             padding: 1.5rem;
             border-radius: 16px;
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: var(--font-title);
             font-weight: 700;
             transform: rotate(5deg);
             z-index: 3;
@@ -503,7 +571,7 @@
             align-items: center;
             justify-content: center;
             font-size: 1.5rem;
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: var(--font-title);
             font-weight: 900;
             margin: 0 auto 2rem;
             box-shadow: 0 0 20px var(--accent-glow);
@@ -526,7 +594,7 @@
         .stat-num {
             font-size: clamp(2.5rem, 4vw, 4.5rem);
             font-weight: 900;
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: var(--font-title);
             letter-spacing: -0.05em;
             margin-bottom: 0.5rem;
         }
@@ -537,6 +605,7 @@
             letter-spacing: 0.1em;
             font-weight: 600;
             opacity: 0.8;
+            font-family: var(--font-title);
         }
 
         /* ================= 8. TESTIMONIALS ================= */
@@ -562,6 +631,7 @@
             font-size: 1.25rem;
             line-height: 1.7;
             margin-bottom: 2rem;
+            font-family: var(--font-serif);
             font-style: italic;
         }
 
@@ -579,8 +649,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: var(--font-title);
             font-weight: 700;
+            font-size: 1.2rem;
         }
 
         .author-info h4 {
@@ -620,13 +691,13 @@
             background: none;
             border: none;
             color: var(--text-main);
-            font-size: 1.25rem;
-            font-weight: 600;
+            font-size: 1.4rem;
+            font-weight: 700;
             display: flex;
             justify-content: space-between;
             align-items: center;
             cursor: pointer;
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: var(--font-title);
         }
 
         .faq-icon {
@@ -709,7 +780,7 @@
             color: var(--text-main);
             padding: 1rem 1.25rem;
             border-radius: 12px;
-            font-family: 'Inter', sans-serif;
+            font-family: var(--font-body);
             font-size: 1.1rem;
             transition: all 0.3s ease;
         }
@@ -756,7 +827,7 @@
             margin-top: 2rem;
             cursor: pointer;
             text-decoration: underline;
-            font-family: 'Inter', sans-serif;
+            font-family: var(--font-body);
             font-size: 1.1rem;
         }
 
@@ -796,6 +867,9 @@
             .stats-grid {
                 grid-template-columns: 1fr 1fr;
             }
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
             .process-line {
                 display: none;
             }
@@ -818,10 +892,15 @@
                 grid-template-columns: 1fr;
             }
             .hero-actions {
-                flex-direction: column;
-            }
-            .btn {
-                width: 100%;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        @media (max-width: 576px) {
+            .portfolio-header h2 {
+                font-size: 2rem;
             }
         }
     </style>
@@ -864,29 +943,42 @@
         </div>
     </section>
 
-    <!-- 2. CLIENTS SECTION -->
-    <section class="clients reveal" id="clients">
-        <div class="container">
-            <p>Empresas que já riram (de nervoso) e depois lucraram com meus textos</p>
-        </div>
-        <div class="marquee-wrapper">
-            <!-- First set -->
-            <div class="marquee-content">
-                <div class="client-logo"><i data-lucide="star"></i> TechCorp</div>
-                <div class="client-logo"><i data-lucide="star"></i> InovaPay</div>
-                <div class="client-logo"><i data-lucide="star"></i> EcoVida</div>
-                <div class="client-logo"><i data-lucide="star"></i> Agência XYZ</div>
-                <div class="client-logo"><i data-lucide="star"></i> Saúde+</div>
-                <div class="client-logo"><i data-lucide="star"></i> Financ.io</div>
+    <!-- 2. PORTFOLIO SECTION -->
+    <section class="portfolio-section" id="portfolio">
+        <div class="container reveal">
+            <div class="portfolio-header">
+                <h2>Projetos que pararam o <span class="serif-italic" style="color: var(--accent-cyan);">scroll</span> e bateram metas.</h2>
+                <p>Empresas que já riram (de nervoso) e depois lucraram com meus textos</p>
             </div>
-            <!-- Duplicated set for seamless loop -->
-            <div class="marquee-content">
-                <div class="client-logo"><i data-lucide="star"></i> TechCorp</div>
-                <div class="client-logo"><i data-lucide="star"></i> InovaPay</div>
-                <div class="client-logo"><i data-lucide="star"></i> EcoVida</div>
-                <div class="client-logo"><i data-lucide="star"></i> Agência XYZ</div>
-                <div class="client-logo"><i data-lucide="star"></i> Saúde+</div>
-                <div class="client-logo"><i data-lucide="star"></i> Financ.io</div>
+        </div>
+        
+        <div class="portfolio-track-container reveal">
+            <!-- ROW 1 (Scrolls Right) -->
+            <div class="portfolio-track scroll-right">
+                <!-- Imagens Originais -->
+                <div class="portfolio-item"><img src="imageye___-_imgi_104_sip-a-juice-website-0.webp" alt="Portfolio 1" loading="lazy"></div>
+                <div class="portfolio-item"><img src="imageye___-_imgi_107_sushi-website-1.webp" alt="Portfolio 2" loading="lazy"></div>
+                <div class="portfolio-item"><img src="imageye___-_imgi_92_yard-website.webp" alt="Portfolio 3" loading="lazy"></div>
+                <div class="portfolio-item"><img src="imageye___-_imgi_95_website-1.webp" alt="Portfolio 4" loading="lazy"></div>
+                <!-- Imagens Duplicadas (Necessário para o Loop Infinito ser suave) -->
+                <div class="portfolio-item"><img src="imageye___-_imgi_104_sip-a-juice-website-0.webp" alt="Portfolio 1" loading="lazy"></div>
+                <div class="portfolio-item"><img src="imageye___-_imgi_107_sushi-website-1.webp" alt="Portfolio 2" loading="lazy"></div>
+                <div class="portfolio-item"><img src="imageye___-_imgi_92_yard-website.webp" alt="Portfolio 3" loading="lazy"></div>
+                <div class="portfolio-item"><img src="imageye___-_imgi_95_website-1.webp" alt="Portfolio 4" loading="lazy"></div>
+            </div>
+
+            <!-- ROW 2 (Scrolls Left) -->
+            <div class="portfolio-track scroll-left">
+                <!-- Imagens Originais -->
+                <div class="portfolio-item"><img src="imageye___-_imgi_113_noeme-website-2.webp" alt="Portfolio 5" loading="lazy"></div>
+                <div class="portfolio-item"><img src="imageye___-_imgi_101_P-Editor-Website.webp" alt="Portfolio 6" loading="lazy"></div>
+                <div class="portfolio-item"><img src="imageye___-_imgi_110_website-6.webp" alt="Portfolio 7" loading="lazy"></div>
+                <div class="portfolio-item"><img src="imageye___-_imgi_98_website-2.webp" alt="Portfolio 8" loading="lazy"></div>
+                <!-- Imagens Duplicadas (Necessário para o Loop Infinito ser suave) -->
+                <div class="portfolio-item"><img src="imageye___-_imgi_113_noeme-website-2.webp" alt="Portfolio 5" loading="lazy"></div>
+                <div class="portfolio-item"><img src="imageye___-_imgi_101_P-Editor-Website.webp" alt="Portfolio 6" loading="lazy"></div>
+                <div class="portfolio-item"><img src="imageye___-_imgi_110_website-6.webp" alt="Portfolio 7" loading="lazy"></div>
+                <div class="portfolio-item"><img src="imageye___-_imgi_98_website-2.webp" alt="Portfolio 8" loading="lazy"></div>
             </div>
         </div>
     </section>
@@ -895,7 +987,7 @@
     <section id="problema">
         <div class="container">
             <div class="text-center reveal" style="text-align: center; max-width: 700px; margin: 0 auto; margin-bottom: 4rem;">
-                <h2 class="title-section" style="margin-bottom: 1rem;">Sintomas de que sua copy <br><span style="color: var(--danger);">faleceu</span></h2>
+                <h2 class="title-section" style="margin-bottom: 1rem;">Sintomas de que sua copy <br><span class="serif-italic" style="color: var(--danger);">faleceu</span></h2>
                 <p class="text-lead" style="font-size: 1.25rem;">Se você marcar mais de 2, precisamos conversar urgentemente.</p>
             </div>
             
@@ -929,7 +1021,7 @@
                 <p class="text-lead">Transformo visitantes confusos em compradores impulsivos usando apenas o teclado (e muita técnica obscura de psicologia).</p>
             </div>
 
-            <div class="cards-grid reveal">
+            <div class="services-grid reveal">
                 <div class="service-card">
                     <div class="service-icon-wrap"><i data-lucide="zap" size="28"></i></div>
                     <div>
@@ -972,14 +1064,14 @@
                     <span style="font-family: 'Space Grotesk', sans-serif; font-size: 0.8rem; letter-spacing: 2px;">[FOTO AQUI]</span>
                 </div>
                 <div class="about-badge">
-                    Não sou IA.<br>(Eu acho).
-                </div>
+                Não sou IA.<br>(Eu acho).
             </div>
-            
-            <div class="about-content">
-                <h2 class="title-section">Quem é a <span class="highlight" style="text-decoration: line-through; opacity: 0.5;">doida</span> profissional das palavras?</h2>
-                <p>Prazer, Brenda. Sou copywriter, estrategista e tradutora de <em style="color: #fff;">"juridiquês/tecniquês corporativo"</em> para <strong style="color: #fff;">"Português que as pessoas querem ler e comprar"</strong>.</p>
-                <p>Comecei escrevendo diários dramáticos na adolescência e hoje escrevo campanhas milionárias para empresas. (A diferença é que agora eu ganho para fazer drama focado no problema do seu cliente).</p>
+        </div>
+        
+        <div class="about-content">
+            <h2 class="title-section">Quem é a <span class="highlight"><span style="text-decoration: line-through; opacity: 0.5;">doida</span> profissional</span> das palavras?</h2>
+            <p>Prazer, Brenda. Sou copywriter, estrategista e tradutora de <em style="color: #fff;">"juridiquês/tecniquês corporativo"</em> para <strong style="color: #fff;">"Português que as pessoas querem ler e comprar"</strong>.</p>
+            <p>Comecei escrevendo diários dramáticos na adolescência e hoje escrevo campanhas milionárias para empresas. (A diferença é que agora eu ganho para fazer drama focado no problema do seu cliente).</p>
                 
                 <ul class="about-list">
                     <li><i data-lucide="check-circle-2"></i> Experiência real no campo de batalha digital.</li>
@@ -994,7 +1086,7 @@
     <section style="background-color: var(--surface-color);" id="processo">
         <div class="container">
             <div class="text-center reveal" style="text-align: center; max-width: 700px; margin: 0 auto 4rem;">
-                <h2 class="title-section">Como a mágica acontece</h2>
+                <h2 class="title-section">Como a <span class="serif-italic" style="color: var(--accent-cyan);">mágica</span> acontece</h2>
                 <p class="text-lead">Spoiler: não envolve bola de cristal, envolve pesquisa pesada.</p>
             </div>
             
@@ -1003,19 +1095,19 @@
                 
                 <div class="step-card">
                     <div class="step-num">01</div>
-                    <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">O Interrogatório</h3>
+                    <h3 style="font-size: 1.8rem; margin-bottom: 1rem;">O Interrogatório</h3>
                     <p style="color: var(--text-muted); line-height: 1.6;">Você me conta tudo sobre o produto, as dores do cliente e as fofocas do nicho em um formulário profundo.</p>
                 </div>
                 
                 <div class="step-card">
                     <div class="step-num">02</div>
-                    <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">O Isolamento</h3>
+                    <h3 style="font-size: 1.8rem; margin-bottom: 1rem;">O Isolamento</h3>
                     <p style="color: var(--text-muted); line-height: 1.6;">Eu sumo do mapa, coloco fones de ouvido de cancelamento de ruído e começo a fritar o cérebro escrevendo.</p>
                 </div>
                 
                 <div class="step-card">
                     <div class="step-num">03</div>
-                    <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">O Lançamento</h3>
+                    <h3 style="font-size: 1.8rem; margin-bottom: 1rem;">O Lançamento</h3>
                     <p style="color: var(--text-muted); line-height: 1.6;">Te entrego o texto, você implementa, os leads começam a cair e a gente abre um champanhe (ou uma Skol).</p>
                 </div>
             </div>
@@ -1048,7 +1140,7 @@
     <section id="depoimentos">
         <div class="container">
             <div class="text-center reveal" style="text-align: center; margin-bottom: 4rem;">
-                <h2 class="title-section">Pessoas que não são minha mãe <br>elogiando meu trabalho</h2>
+                <h2 class="title-section">Pessoas que não são minha mãe <br><span class="serif-italic" style="color: var(--accent-pink);">elogiando</span> meu trabalho</h2>
             </div>
             
             <div class="cards-grid reveal">
@@ -1099,7 +1191,7 @@
     <section style="background-color: var(--surface-color); border-top: 1px solid var(--border-color);" id="faq">
         <div class="container reveal">
             <div class="text-center" style="text-align: center; margin-bottom: 3rem;">
-                <h2 class="title-section">Perguntas que eu cansei de <br>responder no WhatsApp</h2>
+                <h2 class="title-section"><span class="serif-italic" style="color: var(--accent-purple);">Perguntas</span> que eu cansei de <br>responder no WhatsApp</h2>
             </div>
             
             <div class="faq-container">
@@ -1150,7 +1242,7 @@
     <section id="contato">
         <div class="container contact-grid reveal">
             <div>
-                <h2 class="title-huge">Mande um sinal de fumaça. <br><span style="color: var(--text-muted);">Ou preencha o form.</span></h2>
+                <h2 class="title-huge">Mande um sinal de fumaça. <br><span class="serif-italic" style="color: var(--accent-yellow);">Ou preencha o form.</span></h2>
                 <p class="text-lead" style="margin-bottom: 1rem;">
                     Pronto para parar de perder dinheiro com textos ruins? Preencha o formulário e me conte sobre o seu projeto. Prometo não mandar spam.
                 </p>
@@ -1172,15 +1264,15 @@
                 <form id="contactForm">
                     <div class="input-group">
                         <label>Como sua mãe te chama?</label>
-                        <input type="text" class="input-control" placeholder="Seu nome completo" required>
+                        <input type="text" id="nome" class="input-control" placeholder="Seu nome completo" required>
                     </div>
                     <div class="input-group">
                         <label>Seu melhor e-mail (não vale o do bol.com.br)</label>
-                        <input type="email" class="input-control" placeholder="nome@empresa.com" required>
+                        <input type="email" id="email" class="input-control" placeholder="nome@empresa.com" required>
                     </div>
                     <div class="input-group">
                         <label>O que está tirando seu sono? (Seu projeto)</label>
-                        <textarea class="input-control" placeholder="Preciso de uma landing page que converta água em vinho..." required></textarea>
+                        <textarea id="projeto" class="input-control" placeholder="Preciso de uma landing page que converta água em vinho..." required></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary btn-submit" id="submitBtn">
                         Salvar minhas conversões agora
@@ -1192,7 +1284,7 @@
                     <div class="icon-box">
                         <i data-lucide="check-circle-2" size="40"></i>
                     </div>
-                    <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; font-family: 'Space Grotesk', sans-serif;">Mensagem enviada!</h3>
+                    <h3 style="font-size: 2rem; margin-bottom: 0.5rem; font-family: var(--font-title);">Mensagem enviada!</h3>
                     <p style="color: var(--text-muted);">Vou ler, dar uma risadinha, pensar na estratégia e te respondo o mais rápido possível.</p>
                     <button class="reset-form" id="resetBtn">Mandar outra mensagem</button>
                 </div>
@@ -1204,7 +1296,7 @@
     <footer>
         <div class="container">
             <p>
-                Feito com <i data-lucide="heart" class="footer-heart" size="14" fill="currentColor"></i>, café e ansiedade por Brenda.Copy &copy; 2024
+                Feito com <i data-lucide="heart" class="footer-heart" size="14" fill="currentColor"></i>, café e ansiedade por Brenda.Copy &copy; <span id="currentYear"></span>
             </p>
             <p style="margin-top: 0.5rem; opacity: 0.6;">Qualquer semelhança com a realidade de um copywriter não é mera coincidência.</p>
         </div>
@@ -1239,7 +1331,10 @@
             });
         });
 
-        // Simulação do Envio do Formulário
+        // Ano automático no rodapé
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Envio do Formulário para WhatsApp
         const form = document.getElementById('contactForm');
         const submitBtn = document.getElementById('submitBtn');
         const successState = document.getElementById('successState');
@@ -1250,13 +1345,27 @@
             
             // Estado de carregamento
             const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<i data-lucide="loader" class="spin"></i> Enviando pombos correios...';
+            submitBtn.innerHTML = '<i data-lucide="loader" class="spin"></i> Redirecionando pro Whats...';
             submitBtn.style.opacity = '0.7';
             submitBtn.style.pointerEvents = 'none';
             lucide.createIcons(); // Recarrega o ícone novo
 
-            // Simula delay de rede
+            // Captura os dados preenchidos
+            const nome = document.getElementById('nome').value;
+            const email = document.getElementById('email').value;
+            const projeto = document.getElementById('projeto').value;
+
+            // Formata a mensagem
+            const mensagem = `Olá Brenda! Vim da sua Landing Page.\n\n*Como minha mãe me chama:* ${nome}\n*Meu melhor e-mail:* ${email}\n\n*O que está tirando meu sono:*\n${projeto}`;
+            const numeroWhats = "5574988153061"; // Seu número (55 + DDD + Numero)
+            const urlWhats = `https://wa.me/${numeroWhats}?text=${encodeURIComponent(mensagem)}`;
+
+            // Simula pequeno delay para a animação de carregamento antes de redirecionar
             setTimeout(() => {
+                // Abre o WhatsApp em nova aba
+                window.open(urlWhats, '_blank');
+                
+                // Esconde o form e mostra o estado de sucesso
                 form.style.display = 'none';
                 successState.style.display = 'block';
                 
@@ -1265,7 +1374,7 @@
                 submitBtn.style.opacity = '1';
                 submitBtn.style.pointerEvents = 'auto';
                 form.reset();
-            }, 1500);
+            }, 1000);
         });
 
         resetBtn.addEventListener('click', () => {
