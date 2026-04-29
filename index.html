@@ -445,8 +445,8 @@
         .service-card:hover {
             transform: translateY(-5px);
             background-color: var(--surface-hover);
-            border-color: var(--accent);
-            box-shadow: 0 10px 30px var(--accent-glow);
+            border-color: rgba(255, 255, 255, 0.1);
+            box-shadow: none;
         }
 
         .service-icon-wrap {
@@ -545,7 +545,7 @@
             top: 0;
             bottom: 0;
             width: 2px;
-            background: linear-gradient(to bottom, var(--accent), var(--border-color));
+            background: linear-gradient(to bottom, var(--danger), var(--border-color));
             transform: translateX(-50%);
         }
         .v-timeline-item {
@@ -562,10 +562,10 @@
             width: 20px;
             height: 20px;
             background: var(--bg-color);
-            border: 4px solid var(--accent);
+            border: 4px solid var(--danger);
             border-radius: 50%;
             transform: translateX(-50%);
-            box-shadow: 0 0 15px var(--accent-glow);
+            box-shadow: 0 0 15px rgba(255, 75, 75, 0.2);
             z-index: 2;
         }
         .v-timeline-card {
@@ -577,10 +577,10 @@
             transition: all 0.4s ease;
         }
         .v-timeline-card:hover {
-            border-color: var(--accent);
             transform: translateY(-5px);
             background-color: var(--surface-hover);
-            box-shadow: 0 10px 30px var(--accent-glow);
+            border-color: rgba(255, 255, 255, 0.1);
+            box-shadow: none;
         }
         .v-timeline-item:nth-child(odd) .v-timeline-card { margin-right: 50%; }
         .v-timeline-item:nth-child(even) .v-timeline-card { margin-left: 50%; }
@@ -622,7 +622,25 @@
             font-family: var(--font-title);
         }
 
-        /* ================= 8. TESTIMONIALS ================= */
+        /* ================= 8. TESTIMONIALS (HORIZONTAL SCROLL) ================= */
+        .testimonials-track {
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+            padding: 2rem 0;
+            scroll-behavior: auto; /* Deixa natural para o scroll com mouse wheel */
+            -webkit-overflow-scrolling: touch; /* Suavidade no iOS */
+            
+            /* Remove a barra de rolagem em todos os navegadores */
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE e Edge */
+        }
+
+        /* Esconde barra no Chrome, Safari e Opera */
+        .testimonials-track::-webkit-scrollbar {
+            display: none; 
+        }
+
         .testimonial-card {
             background-color: var(--surface-color);
             border: 1px solid var(--border-color);
@@ -631,14 +649,18 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            height: 100%;
+            height: auto;
+            width: 400px; /* Largura FIXA para o cartão */
+            max-width: 85vw; /* Impede que seja maior que a tela em celulares */
+            flex: 0 0 auto; /* O segredo para NÃO ESTICAR ou encolher */
+            transition: all 0.4s ease;
         }
-
-        .stars {
-            color: var(--accent);
-            display: flex;
-            gap: 0.25rem;
-            margin-bottom: 1.5rem;
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.1);
+            background-color: var(--surface-hover);
+            box-shadow: none;
         }
 
         .testimonial-text {
@@ -895,6 +917,9 @@
             .services-grid {
                 grid-template-columns: 1fr;
             }
+            .process-line {
+                display: none;
+            }
             section {
                 padding: 5rem 0;
             }
@@ -975,12 +1000,21 @@
         <div class="portfolio-track-container reveal">
             <!-- ROW 1 (Scrolls Right) -->
             <div class="portfolio-track scroll-right">
+                <!-- Grupo 1 -->
                 <div class="marquee-group">
                     <div class="portfolio-item"><img src="imageye___-_imgi_104_sip-a-juice-website-0.webp" alt="Portfolio 1" loading="lazy"></div>
                     <div class="portfolio-item"><img src="imageye___-_imgi_107_sushi-website-1.webp" alt="Portfolio 2" loading="lazy"></div>
                     <div class="portfolio-item"><img src="imageye___-_imgi_92_yard-website.webp" alt="Portfolio 3" loading="lazy"></div>
                     <div class="portfolio-item"><img src="imageye___-_imgi_95_website-1.webp" alt="Portfolio 4" loading="lazy"></div>
                 </div>
+                <!-- Grupo 2 (Duplicado para o loop contínuo) -->
+                <div class="marquee-group" aria-hidden="true">
+                    <div class="portfolio-item"><img src="imageye___-_imgi_104_sip-a-juice-website-0.webp" alt="Portfolio 1" loading="lazy"></div>
+                    <div class="portfolio-item"><img src="imageye___-_imgi_107_sushi-website-1.webp" alt="Portfolio 2" loading="lazy"></div>
+                    <div class="portfolio-item"><img src="imageye___-_imgi_92_yard-website.webp" alt="Portfolio 3" loading="lazy"></div>
+                    <div class="portfolio-item"><img src="imageye___-_imgi_95_website-1.webp" alt="Portfolio 4" loading="lazy"></div>
+                </div>
+                <!-- Grupo 3 (Duplicado p/ monitores Ultra-Wide) -->
                 <div class="marquee-group" aria-hidden="true">
                     <div class="portfolio-item"><img src="imageye___-_imgi_104_sip-a-juice-website-0.webp" alt="Portfolio 1" loading="lazy"></div>
                     <div class="portfolio-item"><img src="imageye___-_imgi_107_sushi-website-1.webp" alt="Portfolio 2" loading="lazy"></div>
@@ -991,12 +1025,21 @@
 
             <!-- ROW 2 (Scrolls Left) -->
             <div class="portfolio-track scroll-left">
+                <!-- Grupo 1 -->
                 <div class="marquee-group">
                     <div class="portfolio-item"><img src="imageye___-_imgi_113_noeme-website-2.webp" alt="Portfolio 5" loading="lazy"></div>
                     <div class="portfolio-item"><img src="imageye___-_imgi_101_P-Editor-Website.webp" alt="Portfolio 6" loading="lazy"></div>
                     <div class="portfolio-item"><img src="imageye___-_imgi_110_website-6.webp" alt="Portfolio 7" loading="lazy"></div>
                     <div class="portfolio-item"><img src="imageye___-_imgi_98_website-2.webp" alt="Portfolio 8" loading="lazy"></div>
                 </div>
+                <!-- Grupo 2 (Duplicado para o loop contínuo) -->
+                <div class="marquee-group" aria-hidden="true">
+                    <div class="portfolio-item"><img src="imageye___-_imgi_113_noeme-website-2.webp" alt="Portfolio 5" loading="lazy"></div>
+                    <div class="portfolio-item"><img src="imageye___-_imgi_101_P-Editor-Website.webp" alt="Portfolio 6" loading="lazy"></div>
+                    <div class="portfolio-item"><img src="imageye___-_imgi_110_website-6.webp" alt="Portfolio 7" loading="lazy"></div>
+                    <div class="portfolio-item"><img src="imageye___-_imgi_98_website-2.webp" alt="Portfolio 8" loading="lazy"></div>
+                </div>
+                <!-- Grupo 3 (Duplicado p/ monitores Ultra-Wide) -->
                 <div class="marquee-group" aria-hidden="true">
                     <div class="portfolio-item"><img src="imageye___-_imgi_113_noeme-website-2.webp" alt="Portfolio 5" loading="lazy"></div>
                     <div class="portfolio-item"><img src="imageye___-_imgi_101_P-Editor-Website.webp" alt="Portfolio 6" loading="lazy"></div>
@@ -1098,7 +1141,7 @@
     <section id="processo">
         <div class="container">
             <div class="text-center reveal" style="text-align: center; max-width: 700px; margin: 0 auto 2rem;">
-                <h2 class="title-section">Como a <span class="serif-italic" style="color: var(--accent-cyan);">mágica</span> acontece</h2>
+                <h2 class="title-section">Como a <span class="serif-italic" style="color: var(--danger);">mágica</span> acontece</h2>
                 <p class="text-lead">Spoiler: não envolve bola de cristal, envolve pesquisa pesada.</p>
             </div>
 
@@ -1106,7 +1149,7 @@
                 <div class="v-timeline-item">
                     <div class="v-timeline-dot"></div>
                     <div class="v-timeline-card">
-                        <span style="color: var(--accent); font-weight: 700; font-family: var(--font-title); font-size: 0.85rem; letter-spacing: 1px; display: block; margin-bottom: 0.5rem;">01. BRIEFING</span>
+                        <span style="color: var(--danger); font-weight: 700; font-family: var(--font-title); font-size: 0.85rem; letter-spacing: 1px; display: block; margin-bottom: 0.5rem;">01. BRIEFING</span>
                         <h3>O Interrogatório</h3>
                         <p style="color: var(--text-muted); line-height: 1.6; margin-top: 1rem;">Você me conta tudo sobre o produto, as dores do cliente e as fofocas do nicho em um formulário profundo.</p>
                     </div>
@@ -1115,7 +1158,7 @@
                 <div class="v-timeline-item">
                     <div class="v-timeline-dot"></div>
                     <div class="v-timeline-card">
-                        <span style="color: var(--accent); font-weight: 700; font-family: var(--font-title); font-size: 0.85rem; letter-spacing: 1px; display: block; margin-bottom: 0.5rem;">02. EXECUÇÃO</span>
+                        <span style="color: var(--danger); font-weight: 700; font-family: var(--font-title); font-size: 0.85rem; letter-spacing: 1px; display: block; margin-bottom: 0.5rem;">02. EXECUÇÃO</span>
                         <h3>O Isolamento</h3>
                         <p style="color: var(--text-muted); line-height: 1.6; margin-top: 1rem;">Eu sumo do mapa, coloco fones de ouvido de cancelamento de ruído e começo a fritar o cérebro escrevendo.</p>
                     </div>
@@ -1124,7 +1167,7 @@
                 <div class="v-timeline-item">
                     <div class="v-timeline-dot"></div>
                     <div class="v-timeline-card">
-                        <span style="color: var(--accent); font-weight: 700; font-family: var(--font-title); font-size: 0.85rem; letter-spacing: 1px; display: block; margin-bottom: 0.5rem;">03. ENTREGA</span>
+                        <span style="color: var(--danger); font-weight: 700; font-family: var(--font-title); font-size: 0.85rem; letter-spacing: 1px; display: block; margin-bottom: 0.5rem;">03. ENTREGA</span>
                         <h3>O Lançamento</h3>
                         <p style="color: var(--text-muted); line-height: 1.6; margin-top: 1rem;">Te entrego o texto, você implementa, os leads começam a cair e a gente abre um champanhe (ou uma Skol).</p>
                     </div>
@@ -1137,7 +1180,7 @@
     <section class="stats-section reveal">
         <div class="container stats-grid">
             <div>
-                <div class="stat-num">+R$2M</div>
+                <div class="stat-num">+R$3.3M</div>
                 <div class="stat-label">Gerados em vendas</div>
             </div>
             <div>
@@ -1145,7 +1188,7 @@
                 <div class="stat-label">Cafés consumidos</div>
             </div>
             <div>
-                <div class="stat-num">300+</div>
+                <div class="stat-num">1.250+</div>
                 <div class="stat-label">Textos aprovados</div>
             </div>
             <div>
@@ -1162,20 +1205,13 @@
                 <h2 class="title-section">Pessoas que não são minha mãe <span class="serif-italic" style="color: var(--accent-pink);">elogiando</span> meu trabalho</h2>
             </div>
             
-            <div class="cards-grid reveal">
+            <div class="testimonials-track reveal" id="testimonials-track">
                 <div class="testimonial-card">
                     <div>
-                        <div class="stars">
-                            <i data-lucide="star" fill="currentColor" size="18"></i>
-                            <i data-lucide="star" fill="currentColor" size="18"></i>
-                            <i data-lucide="star" fill="currentColor" size="18"></i>
-                            <i data-lucide="star" fill="currentColor" size="18"></i>
-                            <i data-lucide="star" fill="currentColor" size="18"></i>
-                        </div>
                         <p class="testimonial-text">"A Brenda consegue colocar em palavras exatas o que eu sinto, mas não sei explicar. Os e-mails que ela escreveu tiveram 45% de taxa de abertura. Surreal."</p>
                     </div>
                     <div class="author">
-                        <div class="author-avatar">M</div>
+                        <div class="author-avatar" style="background-color: rgba(204, 255, 0, 0.1); color: var(--accent); border: 1px solid var(--accent);">M</div>
                         <div class="author-info">
                             <h4>Maria Fernanda</h4>
                             <p>Especialista em Marketing</p>
@@ -1185,20 +1221,104 @@
                 
                 <div class="testimonial-card">
                     <div>
-                        <div class="stars">
-                            <i data-lucide="star" fill="currentColor" size="18"></i>
-                            <i data-lucide="star" fill="currentColor" size="18"></i>
-                            <i data-lucide="star" fill="currentColor" size="18"></i>
-                            <i data-lucide="star" fill="currentColor" size="18"></i>
-                            <i data-lucide="star" fill="currentColor" size="18"></i>
-                        </div>
                         <p class="testimonial-text">"Profissional, rápida e tem um senso de humor que deixa a copy leve mas absurdamente persuasiva. Só não a contratem muito porque eu preciso dela livre pros meus projetos."</p>
                     </div>
                     <div class="author">
-                        <div class="author-avatar">C</div>
+                        <div class="author-avatar" style="background-color: rgba(0, 229, 255, 0.1); color: var(--accent-cyan); border: 1px solid var(--accent-cyan);">C</div>
                         <div class="author-info">
                             <h4>Carlos Eduardo</h4>
                             <p>Produtor Digital</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div>
+                        <p class="testimonial-text">"Nunca vi uma copy converter tão rápido. Em 2 dias de campanha, já tínhamos superado a meta do mês inteiro com a nova landing page."</p>
+                    </div>
+                    <div class="author">
+                        <div class="author-avatar" style="background-color: rgba(255, 77, 248, 0.1); color: var(--accent-pink); border: 1px solid var(--accent-pink);">R</div>
+                        <div class="author-info">
+                            <h4>Rafael Souza</h4>
+                            <p>Empreendedor Digital</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div>
+                        <p class="testimonial-text">"Minha taxa de cliques nos anúncios triplicou depois que trocamos os textos genéricos pela copy dela. Ela realmente entende como o cérebro do consumidor funciona."</p>
+                    </div>
+                    <div class="author">
+                        <div class="author-avatar" style="background-color: rgba(196, 113, 237, 0.1); color: var(--accent-purple); border: 1px solid var(--accent-purple);">J</div>
+                        <div class="author-info">
+                            <h4>Juliana Alves</h4>
+                            <p>Gestora de Tráfego</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div>
+                        <p class="testimonial-text">"O investimento se pagou na primeira semana. Uma capacidade absurda de entender a dor do nosso público e transformar isso em urgência de compra."</p>
+                    </div>
+                    <div class="author">
+                        <div class="author-avatar" style="background-color: rgba(255, 215, 0, 0.1); color: var(--accent-yellow); border: 1px solid var(--accent-yellow);">P</div>
+                        <div class="author-info">
+                            <h4>Pedro Mendes</h4>
+                            <p>Co-fundador de SaaS</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div>
+                        <p class="testimonial-text">"Eu costumava ter vergonha da minha página de vendas porque não refletia a qualidade do meu produto. Agora, tenho orgulho de mandar o link para os clientes."</p>
+                    </div>
+                    <div class="author">
+                        <div class="author-avatar" style="background-color: rgba(255, 255, 255, 0.05); color: #fff; border: 1px solid rgba(255,255,255,0.2);">C</div>
+                        <div class="author-info">
+                            <h4>Camila Rocha</h4>
+                            <p>Mentora e Consultora</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div>
+                        <p class="testimonial-text">"A única copywriter que conseguiu decifrar a voz da minha marca sem soar forçado. Excepcional no que faz, recomendo de olhos fechados."</p>
+                    </div>
+                    <div class="author">
+                        <div class="author-avatar" style="background-color: rgba(0, 229, 255, 0.1); color: var(--accent-cyan); border: 1px solid var(--accent-cyan);">T</div>
+                        <div class="author-info">
+                            <h4>Thiago Oliveira</h4>
+                            <p>E-commerce Owner</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div>
+                        <p class="testimonial-text">"Nossos e-mails saíram de 12% de abertura para quase 40%. A comunicação com nossa base mudou da água pro vinho graças à estrutura narrativa."</p>
+                    </div>
+                    <div class="author">
+                        <div class="author-avatar" style="background-color: rgba(255, 75, 75, 0.1); color: var(--danger); border: 1px solid var(--danger);">L</div>
+                        <div class="author-info">
+                            <h4>Letícia Costa</h4>
+                            <p>Head de CRM</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div>
+                        <p class="testimonial-text">"Textos hipnóticos. Simplesmente não dá vontade de parar de ler. Se você precisa que as pessoas prestem atenção na sua oferta, a Brenda é a solução."</p>
+                    </div>
+                    <div class="author">
+                        <div class="author-avatar" style="background-color: rgba(204, 255, 0, 0.1); color: var(--accent); border: 1px solid var(--accent);">A</div>
+                        <div class="author-info">
+                            <h4>André Felipe</h4>
+                            <p>Infoprodutor</p>
                         </div>
                     </div>
                 </div>
@@ -1261,7 +1381,7 @@
     <section id="contato">
         <div class="container contact-grid reveal">
             <div>
-                <h2 class="title-section">Mande um sinal de fumaça. <span class="serif-italic" style="color: var(--accent-yellow);">Ou preencha o form.</span></h2>
+                <h2 class="title-huge">Mande um sinal de fumaça. <br><span class="serif-italic" style="color: var(--accent-yellow);">Ou preencha o form.</span></h2>
                 <p class="text-lead" style="margin-bottom: 1rem;">
                     Pronto para parar de perder dinheiro com textos ruins? Preencha o formulário e me conte sobre o seu projeto. Prometo não mandar spam.
                 </p>
@@ -1359,20 +1479,28 @@
             submitBtn.innerHTML = '<i data-lucide="loader" class="spin"></i> Redirecionando pro Whats...';
             submitBtn.style.opacity = '0.7';
             submitBtn.style.pointerEvents = 'none';
-            lucide.createIcons();
+            lucide.createIcons(); // Recarrega o ícone novo
 
+            // Captura os dados preenchidos
             const nome = document.getElementById('nome').value;
             const email = document.getElementById('email').value;
             const projeto = document.getElementById('projeto').value;
 
+            // Formata a mensagem
             const mensagem = `Olá Brenda! Vim da sua Landing Page.\n\n*Como minha mãe me chama:* ${nome}\n*Meu melhor e-mail:* ${email}\n\n*O que está tirando meu sono:*\n${projeto}`;
-            const numeroWhats = "5574988153061";
+            const numeroWhats = "5574988153061"; // Seu número (55 + DDD + Numero)
             const urlWhats = `https://wa.me/${numeroWhats}?text=${encodeURIComponent(mensagem)}`;
 
+            // Simula pequeno delay para a animação de carregamento antes de redirecionar
             setTimeout(() => {
+                // Abre o WhatsApp em nova aba
                 window.open(urlWhats, '_blank');
+                
+                // Esconde o form e mostra o estado de sucesso
                 form.style.display = 'none';
                 successState.style.display = 'block';
+                
+                // Restaura o botão para a próxima vez
                 submitBtn.innerHTML = originalText;
                 submitBtn.style.opacity = '1';
                 submitBtn.style.pointerEvents = 'auto';
@@ -1385,19 +1513,47 @@
             form.style.display = 'block';
         });
 
+        // Interceptação de Scroll Lateral para Testemunhos
+        const testimonialsTrack = document.getElementById('testimonials-track');
+        if (testimonialsTrack) {
+            testimonialsTrack.addEventListener('wheel', (e) => {
+                // Se o scroll for predominantemente vertical
+                if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+                    const maxScrollLeft = testimonialsTrack.scrollWidth - testimonialsTrack.clientWidth;
+                    const isAtStart = testimonialsTrack.scrollLeft <= 0;
+                    const isAtEnd = testimonialsTrack.scrollLeft >= maxScrollLeft - 1; // 1px de tolerância
+                    
+                    // Rolando para baixo e ainda não chegou ao final da lista
+                    if (e.deltaY > 0 && !isAtEnd) {
+                        e.preventDefault();
+                        testimonialsTrack.scrollLeft += e.deltaY;
+                    } 
+                    // Rolando para cima e ainda não chegou ao início da lista
+                    else if (e.deltaY < 0 && !isAtStart) {
+                        e.preventDefault();
+                        testimonialsTrack.scrollLeft += e.deltaY;
+                    }
+                    // Se chegou no limite, deixa a página rolar normalmente para cima/baixo
+                }
+            }, { passive: false });
+        }
+
         // Animação de Scroll Reveal
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
                 var windowHeight = window.innerHeight;
                 var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 100;
+                var elementVisible = 100; // Ponto de aparição
+
                 if (elementTop < windowHeight - elementVisible) {
                     reveals[i].classList.add("active");
                 }
             }
         }
+
         window.addEventListener("scroll", reveal);
+        // Dispara uma vez no load
         reveal();
     </script>
 </body>
