@@ -435,31 +435,24 @@
         }
 
         .service-card {
-            display: flex;
-            gap: 1.5rem;
-            padding: 2.5rem;
-            background-color: transparent;
+            background-color: var(--surface-color);
             border: 1px solid var(--border-color);
+            padding: 2.5rem;
             border-radius: 24px;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
         }
 
         .service-card:hover {
-            background-color: var(--accent-glow);
+            transform: translateY(-5px);
+            background-color: var(--surface-hover);
             border-color: var(--accent);
+            box-shadow: 0 10px 30px var(--accent-glow);
         }
 
         .service-icon-wrap {
-            background-color: var(--surface-color);
-            padding: 1rem;
-            border-radius: 16px;
-            height: fit-content;
-            transition: all 0.3s ease;
-        }
-
-        .service-card:hover .service-icon-wrap {
-            background-color: var(--accent);
-            color: #000;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            color: var(--accent);
         }
 
         /* ================= 5. ABOUT ME ================= */
@@ -539,49 +532,63 @@
             color: var(--accent);
         }
 
-        /* ================= 6. PROCESS ================= */
-        .process-steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
+        /* ================= 6. PROCESS (TIMELINE) ================= */
+        .v-timeline {
             position: relative;
+            padding: 4rem 0;
+            margin-top: 2rem;
         }
-
-        .process-line {
+        .v-timeline::before {
+            content: '';
             position: absolute;
-            top: 40px;
-            left: 10%;
-            right: 10%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--border-color), transparent);
-            z-index: 0;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent), var(--border-color));
+            transform: translateX(-50%);
         }
-
-        .step-card {
-            background-color: var(--surface-color);
-            border: 1px solid var(--border-color);
-            padding: 3rem 2rem;
-            border-radius: 24px;
-            text-align: center;
+        .v-timeline-item {
+            width: 100%;
+            margin-bottom: 4rem;
             position: relative;
-            z-index: 1;
-        }
-
-        .step-num {
-            width: 80px;
-            height: 80px;
-            background-color: var(--bg-color);
-            border: 2px solid var(--accent);
-            color: var(--accent);
-            border-radius: 50%;
             display: flex;
-            align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            font-family: var(--font-title);
-            font-weight: 900;
-            margin: 0 auto 2rem;
-            box-shadow: 0 0 20px var(--accent-glow);
+        }
+        .v-timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: var(--bg-color);
+            border: 4px solid var(--accent);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 15px var(--accent-glow);
+            z-index: 2;
+        }
+        .v-timeline-card {
+            width: 42%;
+            background: var(--surface-color);
+            padding: 2.5rem;
+            border-radius: 24px;
+            border: 1px solid var(--border-color);
+            transition: all 0.4s ease;
+        }
+        .v-timeline-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            background-color: var(--surface-hover);
+            box-shadow: 0 10px 30px var(--accent-glow);
+        }
+        .v-timeline-item:nth-child(odd) .v-timeline-card { margin-right: 50%; }
+        .v-timeline-item:nth-child(even) .v-timeline-card { margin-left: 50%; }
+
+        @media (max-width: 768px) {
+            .v-timeline::before { left: 20px; transform: none; }
+            .v-timeline-dot { left: 20px; transform: translateX(-50%); }
+            .v-timeline-card { width: calc(100% - 60px) !important; margin: 0 0 0 60px !important; }
         }
 
         /* ================= 7. STATS ================= */
@@ -866,6 +873,9 @@
             transform: translateY(0);
         }
 
+        .spin { animation: spin 1s linear infinite; }
+        @keyframes spin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+
         /* ================= MEDIA QUERIES ================= */
         @media (max-width: 992px) {
             .about-grid, .contact-grid {
@@ -884,9 +894,6 @@
             }
             .services-grid {
                 grid-template-columns: 1fr;
-            }
-            .process-line {
-                display: none;
             }
             section {
                 padding: 5rem 0;
@@ -968,21 +975,12 @@
         <div class="portfolio-track-container reveal">
             <!-- ROW 1 (Scrolls Right) -->
             <div class="portfolio-track scroll-right">
-                <!-- Grupo 1 -->
                 <div class="marquee-group">
                     <div class="portfolio-item"><img src="imageye___-_imgi_104_sip-a-juice-website-0.webp" alt="Portfolio 1" loading="lazy"></div>
                     <div class="portfolio-item"><img src="imageye___-_imgi_107_sushi-website-1.webp" alt="Portfolio 2" loading="lazy"></div>
                     <div class="portfolio-item"><img src="imageye___-_imgi_92_yard-website.webp" alt="Portfolio 3" loading="lazy"></div>
                     <div class="portfolio-item"><img src="imageye___-_imgi_95_website-1.webp" alt="Portfolio 4" loading="lazy"></div>
                 </div>
-                <!-- Grupo 2 (Duplicado para o loop contínuo) -->
-                <div class="marquee-group" aria-hidden="true">
-                    <div class="portfolio-item"><img src="imageye___-_imgi_104_sip-a-juice-website-0.webp" alt="Portfolio 1" loading="lazy"></div>
-                    <div class="portfolio-item"><img src="imageye___-_imgi_107_sushi-website-1.webp" alt="Portfolio 2" loading="lazy"></div>
-                    <div class="portfolio-item"><img src="imageye___-_imgi_92_yard-website.webp" alt="Portfolio 3" loading="lazy"></div>
-                    <div class="portfolio-item"><img src="imageye___-_imgi_95_website-1.webp" alt="Portfolio 4" loading="lazy"></div>
-                </div>
-                <!-- Grupo 3 (Duplicado p/ monitores Ultra-Wide) -->
                 <div class="marquee-group" aria-hidden="true">
                     <div class="portfolio-item"><img src="imageye___-_imgi_104_sip-a-juice-website-0.webp" alt="Portfolio 1" loading="lazy"></div>
                     <div class="portfolio-item"><img src="imageye___-_imgi_107_sushi-website-1.webp" alt="Portfolio 2" loading="lazy"></div>
@@ -993,21 +991,12 @@
 
             <!-- ROW 2 (Scrolls Left) -->
             <div class="portfolio-track scroll-left">
-                <!-- Grupo 1 -->
                 <div class="marquee-group">
                     <div class="portfolio-item"><img src="imageye___-_imgi_113_noeme-website-2.webp" alt="Portfolio 5" loading="lazy"></div>
                     <div class="portfolio-item"><img src="imageye___-_imgi_101_P-Editor-Website.webp" alt="Portfolio 6" loading="lazy"></div>
                     <div class="portfolio-item"><img src="imageye___-_imgi_110_website-6.webp" alt="Portfolio 7" loading="lazy"></div>
                     <div class="portfolio-item"><img src="imageye___-_imgi_98_website-2.webp" alt="Portfolio 8" loading="lazy"></div>
                 </div>
-                <!-- Grupo 2 (Duplicado para o loop contínuo) -->
-                <div class="marquee-group" aria-hidden="true">
-                    <div class="portfolio-item"><img src="imageye___-_imgi_113_noeme-website-2.webp" alt="Portfolio 5" loading="lazy"></div>
-                    <div class="portfolio-item"><img src="imageye___-_imgi_101_P-Editor-Website.webp" alt="Portfolio 6" loading="lazy"></div>
-                    <div class="portfolio-item"><img src="imageye___-_imgi_110_website-6.webp" alt="Portfolio 7" loading="lazy"></div>
-                    <div class="portfolio-item"><img src="imageye___-_imgi_98_website-2.webp" alt="Portfolio 8" loading="lazy"></div>
-                </div>
-                <!-- Grupo 3 (Duplicado p/ monitores Ultra-Wide) -->
                 <div class="marquee-group" aria-hidden="true">
                     <div class="portfolio-item"><img src="imageye___-_imgi_113_noeme-website-2.webp" alt="Portfolio 5" loading="lazy"></div>
                     <div class="portfolio-item"><img src="imageye___-_imgi_101_P-Editor-Website.webp" alt="Portfolio 6" loading="lazy"></div>
@@ -1057,31 +1046,23 @@
             <div class="services-grid">
                 <div class="service-card">
                     <div class="service-icon-wrap"><i data-lucide="zap" size="28"></i></div>
-                    <div>
-                        <h3>Landing Pages de Alta Conversão</h3>
-                        <p style="color: var(--text-muted); line-height: 1.6;">Páginas que pegam o usuário pela mão e só soltam quando ele clica no botão de comprar.</p>
-                    </div>
+                    <h3>Landing Pages de Alta Conversão</h3>
+                    <p style="color: var(--text-muted); line-height: 1.6;">Páginas que pegam o usuário pela mão e só soltam quando ele clica no botão de comprar.</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon-wrap"><i data-lucide="mail" size="28"></i></div>
-                    <div>
-                        <h3>E-mails que as pessoas abrem</h3>
-                        <p style="color: var(--text-muted); line-height: 1.6;">Campanhas que não vão para o lixo eletrônico. Porque seus leads merecem rir antes de comprar.</p>
-                    </div>
+                    <h3>E-mails que as pessoas abrem</h3>
+                    <p style="color: var(--text-muted); line-height: 1.6;">Campanhas que não vão para o lixo eletrônico. Porque seus leads merecem rir antes de comprar.</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon-wrap"><i data-lucide="trending-up" size="28"></i></div>
-                    <div>
-                        <h3>Anúncios (Meta & Google Ads)</h3>
-                        <p style="color: var(--text-muted); line-height: 1.6;">Textinhos minúsculos com um poder gigante de fazer o polegar do seu cliente parar de rolar o feed.</p>
-                    </div>
+                    <h3>Anúncios (Meta & Google Ads)</h3>
+                    <p style="color: var(--text-muted); line-height: 1.6;">Textinhos minúsculos com um poder gigante de fazer o polegar do seu cliente parar de rolar o feed.</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon-wrap"><i data-lucide="pen-tool" size="28"></i></div>
-                    <div>
-                        <h3>Páginas de Vendas (Long Form)</h3>
-                        <p style="color: var(--text-muted); line-height: 1.6;">Cartas de vendas tão boas que até a sua concorrência vai querer comprar o seu produto.</p>
-                    </div>
+                    <h3>Páginas de Vendas (Long Form)</h3>
+                    <p style="color: var(--text-muted); line-height: 1.6;">Cartas de vendas tão boas que até a sua concorrência vai querer comprar o seu produto.</p>
                 </div>
             </div>
         </div>
@@ -1097,15 +1078,13 @@
                     <span style="font-family: 'Space Grotesk', sans-serif; font-size: 0.8rem; letter-spacing: 2px;">[FOTO AQUI]</span>
                 </div>
                 <div class="about-badge">
-                Não sou IA.<br>(Eu acho).
+                    Não sou IA.<br>(Eu acho).
+                </div>
             </div>
-        </div>
-        
-        <div class="about-content">
-            <h2 class="title-section">Quem é a <span class="highlight"><span style="text-decoration: line-through; opacity: 0.5;">doida</span> profissional</span> das palavras?</h2>
-            <p>Prazer, Brenda. Sou copywriter, estrategista e tradutora de <em style="color: #fff;">"juridiquês/tecniquês corporativo"</em> para <strong style="color: #fff;">"Português que as pessoas querem ler e comprar"</strong>.</p>
-            <p>Comecei escrevendo diários dramáticos na adolescência e hoje escrevo campanhas milionárias para empresas. (A diferença é que agora eu ganho para fazer drama focado no problema do seu cliente).</p>
-                
+            <div class="about-content">
+                <h2 class="title-section">Quem é a <span class="highlight">profissional</span> das palavras?</h2>
+                <p>Prazer, Brenda. Sou copywriter, estrategista e tradutora de <em style="color: #fff;">"juridiquês/tecniquês corporativo"</em> para <strong style="color: #fff;">"Português que as pessoas querem ler e comprar"</strong>.</p>
+                <p>Comecei escrevendo diários dramáticos na adolescência e hoje escrevo campanhas milionárias para empresas. (A diferença é que agora eu ganho para fazer drama focado no problema do seu cliente).</p>
                 <ul class="about-list">
                     <li><i data-lucide="check-circle-2"></i> Experiência real no campo de batalha digital.</li>
                     <li><i data-lucide="check-circle-2"></i> Obcecada por psicologia de consumo.</li>
@@ -1115,33 +1094,40 @@
         </div>
     </section>
 
-    <!-- 6. THE PROCESS -->
-    <section style="background-color: var(--surface-color);" id="processo">
+    <!-- 6. THE PROCESS (TIMELINE) -->
+    <section id="processo">
         <div class="container">
-            <div class="text-center reveal" style="text-align: center; max-width: 700px; margin: 0 auto 4rem;">
+            <div class="text-center reveal" style="text-align: center; max-width: 700px; margin: 0 auto 2rem;">
                 <h2 class="title-section">Como a <span class="serif-italic" style="color: var(--accent-cyan);">mágica</span> acontece</h2>
                 <p class="text-lead">Spoiler: não envolve bola de cristal, envolve pesquisa pesada.</p>
             </div>
-            
-            <div class="process-steps reveal">
-                <div class="process-line"></div>
-                
-                <div class="step-card">
-                    <div class="step-num">01</div>
-                    <h3 style="font-size: 1.8rem; margin-bottom: 1rem;">O Interrogatório</h3>
-                    <p style="color: var(--text-muted); line-height: 1.6;">Você me conta tudo sobre o produto, as dores do cliente e as fofocas do nicho em um formulário profundo.</p>
+
+            <div class="v-timeline reveal">
+                <div class="v-timeline-item">
+                    <div class="v-timeline-dot"></div>
+                    <div class="v-timeline-card">
+                        <span style="color: var(--accent); font-weight: 700; font-family: var(--font-title); font-size: 0.85rem; letter-spacing: 1px; display: block; margin-bottom: 0.5rem;">01. BRIEFING</span>
+                        <h3>O Interrogatório</h3>
+                        <p style="color: var(--text-muted); line-height: 1.6; margin-top: 1rem;">Você me conta tudo sobre o produto, as dores do cliente e as fofocas do nicho em um formulário profundo.</p>
+                    </div>
                 </div>
-                
-                <div class="step-card">
-                    <div class="step-num">02</div>
-                    <h3 style="font-size: 1.8rem; margin-bottom: 1rem;">O Isolamento</h3>
-                    <p style="color: var(--text-muted); line-height: 1.6;">Eu sumo do mapa, coloco fones de ouvido de cancelamento de ruído e começo a fritar o cérebro escrevendo.</p>
+
+                <div class="v-timeline-item">
+                    <div class="v-timeline-dot"></div>
+                    <div class="v-timeline-card">
+                        <span style="color: var(--accent); font-weight: 700; font-family: var(--font-title); font-size: 0.85rem; letter-spacing: 1px; display: block; margin-bottom: 0.5rem;">02. EXECUÇÃO</span>
+                        <h3>O Isolamento</h3>
+                        <p style="color: var(--text-muted); line-height: 1.6; margin-top: 1rem;">Eu sumo do mapa, coloco fones de ouvido de cancelamento de ruído e começo a fritar o cérebro escrevendo.</p>
+                    </div>
                 </div>
-                
-                <div class="step-card">
-                    <div class="step-num">03</div>
-                    <h3 style="font-size: 1.8rem; margin-bottom: 1rem;">O Lançamento</h3>
-                    <p style="color: var(--text-muted); line-height: 1.6;">Te entrego o texto, você implementa, os leads começam a cair e a gente abre um champanhe (ou uma Skol).</p>
+
+                <div class="v-timeline-item">
+                    <div class="v-timeline-dot"></div>
+                    <div class="v-timeline-card">
+                        <span style="color: var(--accent); font-weight: 700; font-family: var(--font-title); font-size: 0.85rem; letter-spacing: 1px; display: block; margin-bottom: 0.5rem;">03. ENTREGA</span>
+                        <h3>O Lançamento</h3>
+                        <p style="color: var(--text-muted); line-height: 1.6; margin-top: 1rem;">Te entrego o texto, você implementa, os leads começam a cair e a gente abre um champanhe (ou uma Skol).</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1342,20 +1328,14 @@
 
         // Lógica do Accordion FAQ
         const faqItems = document.querySelectorAll('.faq-item');
-        
         faqItems.forEach(item => {
             const question = item.querySelector('.faq-question');
-            
             question.addEventListener('click', () => {
                 const isActive = item.classList.contains('active');
-                
-                // Fechar todos
                 faqItems.forEach(otherItem => {
                     otherItem.classList.remove('active');
                     otherItem.querySelector('.faq-answer').style.maxHeight = null;
                 });
-
-                // Se não estava ativo, abre
                 if (!isActive) {
                     item.classList.add('active');
                     const answer = item.querySelector('.faq-answer');
@@ -1375,33 +1355,24 @@
 
         form.addEventListener('submit', (e) => {
             e.preventDefault();
-            
-            // Estado de carregamento
             const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = 'Redirecionando pro Whats...';
+            submitBtn.innerHTML = '<i data-lucide="loader" class="spin"></i> Redirecionando pro Whats...';
             submitBtn.style.opacity = '0.7';
             submitBtn.style.pointerEvents = 'none';
+            lucide.createIcons();
 
-            // Captura os dados preenchidos
             const nome = document.getElementById('nome').value;
             const email = document.getElementById('email').value;
             const projeto = document.getElementById('projeto').value;
 
-            // Formata a mensagem
             const mensagem = `Olá Brenda! Vim da sua Landing Page.\n\n*Como minha mãe me chama:* ${nome}\n*Meu melhor e-mail:* ${email}\n\n*O que está tirando meu sono:*\n${projeto}`;
-            const numeroWhats = "5574988153061"; // Seu número (55 + DDD + Numero)
+            const numeroWhats = "5574988153061";
             const urlWhats = `https://wa.me/${numeroWhats}?text=${encodeURIComponent(mensagem)}`;
 
-            // Simula pequeno delay para a animação de carregamento antes de redirecionar
             setTimeout(() => {
-                // Abre o WhatsApp em nova aba
                 window.open(urlWhats, '_blank');
-                
-                // Esconde o form e mostra o estado de sucesso
                 form.style.display = 'none';
                 successState.style.display = 'block';
-                
-                // Restaura o botão para a próxima vez
                 submitBtn.innerHTML = originalText;
                 submitBtn.style.opacity = '1';
                 submitBtn.style.pointerEvents = 'auto';
@@ -1420,16 +1391,13 @@
             for (var i = 0; i < reveals.length; i++) {
                 var windowHeight = window.innerHeight;
                 var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 100; // Ponto de aparição
-
+                var elementVisible = 100;
                 if (elementTop < windowHeight - elementVisible) {
                     reveals[i].classList.add("active");
                 }
             }
         }
-
         window.addEventListener("scroll", reveal);
-        // Dispara uma vez no load
         reveal();
     </script>
 </body>
