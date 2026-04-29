@@ -320,20 +320,26 @@
             width: max-content;
         }
 
-        .portfolio-track.scroll-right {
-            animation: scrollRight 40s linear infinite;
+        .marquee-group {
+            display: flex;
+            gap: 1.5rem;
+            flex-shrink: 0;
         }
 
-        .portfolio-track.scroll-left {
-            animation: scrollLeft 40s linear infinite;
+        .scroll-left .marquee-group {
+            animation: scrollLeft 30s linear infinite;
         }
 
-        .portfolio-track:hover {
+        .scroll-right .marquee-group {
+            animation: scrollRight 30s linear infinite;
+        }
+
+        .portfolio-track:hover .marquee-group {
             animation-play-state: paused;
         }
 
         .portfolio-item {
-            width: clamp(280px, 25vw, 400px);
+            width: clamp(340px, 30vw, 500px); /* Imagens 20% maiores */
             border-radius: 16px;
             overflow: hidden;
             border: 1px solid var(--border-color);
@@ -348,12 +354,12 @@
 
         @keyframes scrollLeft {
             0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); } /* Rola até a metade (onde as imagens se repetem) */
+            100% { transform: translateX(calc(-100% - 1.5rem)); }
         }
 
         @keyframes scrollRight {
-            0% { transform: translateX(-50%); } /* Começa da metade */
-            100% { transform: translateX(0); } /* Vai para o começo (rolando para a direita) */
+            0% { transform: translateX(calc(-100% - 1.5rem)); }
+            100% { transform: translateX(0); }
         }
 
         /* ================= 3. PROBLEM SECTION ================= */
@@ -949,30 +955,52 @@
         <div class="portfolio-track-container reveal">
             <!-- ROW 1 (Scrolls Right) -->
             <div class="portfolio-track scroll-right">
-                <!-- Imagens Originais -->
-                <div class="portfolio-item"><img src="imageye___-_imgi_104_sip-a-juice-website-0.webp" alt="Portfolio 1" loading="lazy"></div>
-                <div class="portfolio-item"><img src="imageye___-_imgi_107_sushi-website-1.webp" alt="Portfolio 2" loading="lazy"></div>
-                <div class="portfolio-item"><img src="imageye___-_imgi_92_yard-website.webp" alt="Portfolio 3" loading="lazy"></div>
-                <div class="portfolio-item"><img src="imageye___-_imgi_95_website-1.webp" alt="Portfolio 4" loading="lazy"></div>
-                <!-- Imagens Duplicadas (Necessário para o Loop Infinito ser suave) -->
-                <div class="portfolio-item"><img src="imageye___-_imgi_104_sip-a-juice-website-0.webp" alt="Portfolio 1" loading="lazy"></div>
-                <div class="portfolio-item"><img src="imageye___-_imgi_107_sushi-website-1.webp" alt="Portfolio 2" loading="lazy"></div>
-                <div class="portfolio-item"><img src="imageye___-_imgi_92_yard-website.webp" alt="Portfolio 3" loading="lazy"></div>
-                <div class="portfolio-item"><img src="imageye___-_imgi_95_website-1.webp" alt="Portfolio 4" loading="lazy"></div>
+                <!-- Grupo 1 -->
+                <div class="marquee-group">
+                    <div class="portfolio-item"><img src="imageye___-_imgi_104_sip-a-juice-website-0.webp" alt="Portfolio 1" loading="lazy"></div>
+                    <div class="portfolio-item"><img src="imageye___-_imgi_107_sushi-website-1.webp" alt="Portfolio 2" loading="lazy"></div>
+                    <div class="portfolio-item"><img src="imageye___-_imgi_92_yard-website.webp" alt="Portfolio 3" loading="lazy"></div>
+                    <div class="portfolio-item"><img src="imageye___-_imgi_95_website-1.webp" alt="Portfolio 4" loading="lazy"></div>
+                </div>
+                <!-- Grupo 2 (Duplicado para o loop contínuo) -->
+                <div class="marquee-group" aria-hidden="true">
+                    <div class="portfolio-item"><img src="imageye___-_imgi_104_sip-a-juice-website-0.webp" alt="Portfolio 1" loading="lazy"></div>
+                    <div class="portfolio-item"><img src="imageye___-_imgi_107_sushi-website-1.webp" alt="Portfolio 2" loading="lazy"></div>
+                    <div class="portfolio-item"><img src="imageye___-_imgi_92_yard-website.webp" alt="Portfolio 3" loading="lazy"></div>
+                    <div class="portfolio-item"><img src="imageye___-_imgi_95_website-1.webp" alt="Portfolio 4" loading="lazy"></div>
+                </div>
+                <!-- Grupo 3 (Duplicado p/ monitores Ultra-Wide) -->
+                <div class="marquee-group" aria-hidden="true">
+                    <div class="portfolio-item"><img src="imageye___-_imgi_104_sip-a-juice-website-0.webp" alt="Portfolio 1" loading="lazy"></div>
+                    <div class="portfolio-item"><img src="imageye___-_imgi_107_sushi-website-1.webp" alt="Portfolio 2" loading="lazy"></div>
+                    <div class="portfolio-item"><img src="imageye___-_imgi_92_yard-website.webp" alt="Portfolio 3" loading="lazy"></div>
+                    <div class="portfolio-item"><img src="imageye___-_imgi_95_website-1.webp" alt="Portfolio 4" loading="lazy"></div>
+                </div>
             </div>
 
             <!-- ROW 2 (Scrolls Left) -->
             <div class="portfolio-track scroll-left">
-                <!-- Imagens Originais -->
-                <div class="portfolio-item"><img src="imageye___-_imgi_113_noeme-website-2.webp" alt="Portfolio 5" loading="lazy"></div>
-                <div class="portfolio-item"><img src="imageye___-_imgi_101_P-Editor-Website.webp" alt="Portfolio 6" loading="lazy"></div>
-                <div class="portfolio-item"><img src="imageye___-_imgi_110_website-6.webp" alt="Portfolio 7" loading="lazy"></div>
-                <div class="portfolio-item"><img src="imageye___-_imgi_98_website-2.webp" alt="Portfolio 8" loading="lazy"></div>
-                <!-- Imagens Duplicadas (Necessário para o Loop Infinito ser suave) -->
-                <div class="portfolio-item"><img src="imageye___-_imgi_113_noeme-website-2.webp" alt="Portfolio 5" loading="lazy"></div>
-                <div class="portfolio-item"><img src="imageye___-_imgi_101_P-Editor-Website.webp" alt="Portfolio 6" loading="lazy"></div>
-                <div class="portfolio-item"><img src="imageye___-_imgi_110_website-6.webp" alt="Portfolio 7" loading="lazy"></div>
-                <div class="portfolio-item"><img src="imageye___-_imgi_98_website-2.webp" alt="Portfolio 8" loading="lazy"></div>
+                <!-- Grupo 1 -->
+                <div class="marquee-group">
+                    <div class="portfolio-item"><img src="imageye___-_imgi_113_noeme-website-2.webp" alt="Portfolio 5" loading="lazy"></div>
+                    <div class="portfolio-item"><img src="imageye___-_imgi_101_P-Editor-Website.webp" alt="Portfolio 6" loading="lazy"></div>
+                    <div class="portfolio-item"><img src="imageye___-_imgi_110_website-6.webp" alt="Portfolio 7" loading="lazy"></div>
+                    <div class="portfolio-item"><img src="imageye___-_imgi_98_website-2.webp" alt="Portfolio 8" loading="lazy"></div>
+                </div>
+                <!-- Grupo 2 (Duplicado para o loop contínuo) -->
+                <div class="marquee-group" aria-hidden="true">
+                    <div class="portfolio-item"><img src="imageye___-_imgi_113_noeme-website-2.webp" alt="Portfolio 5" loading="lazy"></div>
+                    <div class="portfolio-item"><img src="imageye___-_imgi_101_P-Editor-Website.webp" alt="Portfolio 6" loading="lazy"></div>
+                    <div class="portfolio-item"><img src="imageye___-_imgi_110_website-6.webp" alt="Portfolio 7" loading="lazy"></div>
+                    <div class="portfolio-item"><img src="imageye___-_imgi_98_website-2.webp" alt="Portfolio 8" loading="lazy"></div>
+                </div>
+                <!-- Grupo 3 (Duplicado p/ monitores Ultra-Wide) -->
+                <div class="marquee-group" aria-hidden="true">
+                    <div class="portfolio-item"><img src="imageye___-_imgi_113_noeme-website-2.webp" alt="Portfolio 5" loading="lazy"></div>
+                    <div class="portfolio-item"><img src="imageye___-_imgi_101_P-Editor-Website.webp" alt="Portfolio 6" loading="lazy"></div>
+                    <div class="portfolio-item"><img src="imageye___-_imgi_110_website-6.webp" alt="Portfolio 7" loading="lazy"></div>
+                    <div class="portfolio-item"><img src="imageye___-_imgi_98_website-2.webp" alt="Portfolio 8" loading="lazy"></div>
+                </div>
             </div>
         </div>
     </section>
