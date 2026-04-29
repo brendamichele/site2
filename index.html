@@ -407,18 +407,25 @@
         }
 
         /* ================= 4. SERVICES ================= */
-        .services-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-bottom: 4rem;
-            flex-wrap: wrap;
-            gap: 2rem;
+        .services-container {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr; /* 1 parte para info, 1.5 partes pros cards na direita */
+            gap: 4rem;
+            align-items: start;
         }
 
-        .services-header .text-lead {
+        .services-info {
+            position: sticky;
+            top: 120px; /* Faz o título acompanhar o scroll caso a tela seja pequena */
+        }
+
+        .services-info .title-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .services-info .text-lead {
             margin-bottom: 0;
-            max-width: 500px;
+            max-width: 450px;
         }
 
         .services-grid {
@@ -867,6 +874,14 @@
             .stats-grid {
                 grid-template-columns: 1fr 1fr;
             }
+            .services-container {
+                grid-template-columns: 1fr; /* Volta para 1 coluna no celular/tablet */
+                gap: 2rem;
+            }
+            .services-info {
+                position: relative;
+                top: 0;
+            }
             .services-grid {
                 grid-template-columns: 1fr;
             }
@@ -892,13 +907,11 @@
                 grid-template-columns: 1fr;
             }
             .hero-actions {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        @media (max-width: 576px) {
+                display: flex;
+                gap: 1rem;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
             .portfolio-header h2 {
                 font-size: 2rem;
             }
@@ -1035,15 +1048,13 @@
 
     <!-- 4. SERVICES -->
     <section style="background-color: var(--surface-color);" id="servicos">
-        <div class="container">
-            <div class="services-header reveal">
-                <div>
-                    <h2 class="title-section">Como eu salvo a sua <br><span class="highlight">conversão</span></h2>
-                </div>
+        <div class="container services-container reveal">
+            <div class="services-info">
+                <h2 class="title-section">Como eu salvo a sua <br><span class="highlight">conversão</span></h2>
                 <p class="text-lead">Transformo visitantes confusos em compradores impulsivos usando apenas o teclado (e muita técnica obscura de psicologia).</p>
             </div>
 
-            <div class="services-grid reveal">
+            <div class="services-grid">
                 <div class="service-card">
                     <div class="service-icon-wrap"><i data-lucide="zap" size="28"></i></div>
                     <div>
