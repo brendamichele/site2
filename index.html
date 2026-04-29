@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brenda.Copy | Textos que Vendem</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&family=Space+Grotesk:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* ================= VARIABLES & RESET ================= */
+        :root {
+            --bg-color: #050505;
+            --surface-color: #111111;
+            --surface-hover: #1a1a1a;
+            --text-main: #f5f5f5;
+            --text-muted: #a1a1aa;
+            --accent: #ccff00; /* Acid Green / Lime */
+            --accent-glow: rgba(204, 255, 0, 0.15);
+            --border-color: #222222;
+            --danger: #ff4b4b;
+
+            /* Fonte principal em uso */
+            --font-body: 'Manrope', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-family: var(--font-body);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+            transition: font-family 0.3s ease;
+        }
+
+        body {
+            overflow-x: hidden;
+            font-size: 1.125rem;
+        }
+
+        ::selection {
+            background-color: var(--accent);
+            color: #000;
+        }
+
+        h1, h2, h3, h4, h5, h6, .brand {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* ================= GLOBAL TYPOGRAPHY ================= */
+        .title-huge {
+            font-size: clamp(3rem, 6vw, 5.5rem);
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+        }
+
+        .title-section {
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+
+        .text-lead {
+            font-size: clamp(1.2rem, 2vw, 1.45rem);
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 2.5rem;
+        }
+
+        .highlight {
+            color: var(--accent);
+        }
+
+        .highlight-bg {
+            background: linear-gradient(120deg, var(--accent) 0%, #99cc00 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* ================= BUTTONS ================= */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem 2.5rem;
+            border-radius: 100px;
+            font-weight: 700;
+            font-size: 1.125rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: #000;
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px var(--accent-glow);
+            background-color: #d4ff1a;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--surface-color);
+            border-color: var(--text-muted);
+        }
+
+        /* ================= LAYOUT & SECTIONS ================= */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        section {
+            padding: 8rem 0;
+            position: relative;
+        }
+
+        /* ================= HEADER ================= */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background-color: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .brand {
+            font-size: 1.5rem;
+            font-weight: 900;
+            letter-spacing: -0.05em;
+        }
+
+        .brand span {
+            color: var(--accent);
+        }
+
+        .nav-btn {
+            background: #fff;
+            color: #000;
+            padding: 0.6rem 1.5rem;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: var(--accent);
+        }
+
+        /* ================= 1. HERO ================= */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 100px; /* Offset header */
+        }
+
+        .hero-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60vw;
+            height: 60vw;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            background-color: rgba(204, 255, 0, 0.05);
+            border: 1px solid rgba(204, 255, 0, 0.2);
+            color: var(--accent);
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* ================= 2. CLIENTS MARQUEE ================= */
+        .clients {
+            padding: 3rem 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            background-color: var(--surface-color);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .clients p {
+            text-align: center;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .marquee-wrapper {
+            display: flex;
+            width: fit-content;
+            animation: scroll 30s linear infinite;
+        }
+
+        .marquee-wrapper:hover {
+            animation-play-state: paused;
+        }
+
+        .marquee-content {
+            display: flex;
+            gap: 4rem;
+            padding-right: 4rem;
+            align-items: center;
+        }
+
+        .client-logo {
+            font-family: 'Space Grotesk', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .client-logo:hover {
+            color: var(--text-main);
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); } /* Scrolls exactly half of the duplicated content */
+        }
+
+        /* ================= 3. PROBLEM SECTION ================= */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .card {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            padding: 2.5rem;
+            border-radius: 24px;
+            transition: all 0.4s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.1);
+            background-color: var(--surface-hover);
+        }
+
+        .card-problem:hover {
+            border-color: rgba(255, 75, 75, 0.4);
+        }
+
+        .card-icon {
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-family: var(--font-body); /* Garante que o título do card mude com o teste */
+            font-weight: 700;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        /* ================= 4. SERVICES ================= */
+        .services-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .services-header .text-lead {
+            margin-bottom: 0;
+            max-width: 500px;
+        }
+
+        .service-card {
+            display: flex;
+            gap: 1.5rem;
+            padding: 2.5rem;
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            background-color: var(--accent-glow);
+            border-color: var(--accent);
+        }
+
+        .service-icon-wrap {
+            background-color: var(--surface-color);
+            padding: 1rem;
+            border-radius: 16px;
+            height: fit-content;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover .service-icon-wrap {
+            background-color: var(--accent);
+            color: #000;
+        }
+
+        /* ================= 5. ABOUT ME ================= */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image-wrapper {
+            position: relative;
+            padding-right: 2rem;
+            padding-bottom: 2rem;
+        }
+
+        .about-image {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            aspect-ratio: 4/5;
+            border-radius: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            position: relative;
+            z-index: 2;
+        }
+
+        .about-image-bg {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            right: -2rem;
+            bottom: -2rem;
+            background-image: repeating-linear-gradient(45deg, var(--border-color) 0, var(--border-color) 1px, transparent 1px, transparent 10px);
+            border-radius: 24px;
+            z-index: 1;
+        }
+
+        .about-badge {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background-color: var(--accent);
+            color: #000;
+            padding: 1.5rem;
+            border-radius: 16px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            transform: rotate(5deg);
+            z-index: 3;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .about-content p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .about-list {
+            margin-top: 2rem;
+        }
+
+        .about-list li {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .about-list i {
+            color: var(--accent);
+        }
+
+        /* ================= 6. PROCESS ================= */
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            position: relative;
+        }
+
+        .process-line {
+            position: absolute;
+            top: 40px;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+            z-index: 0;
+        }
+
+        .step-card {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            padding: 3rem 2rem;
+            border-radius: 24px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-num {
+            width: 80px;
+            height: 80px;
+            background-color: var(--bg-color);
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 900;
+            margin: 0 auto 2rem;
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        /* ================= 7. STATS ================= */
+        .stats-section {
+            background-color: var(--accent);
+            color: #000;
+            padding: 6rem 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-num {
+            font-size: clamp(2.5rem, 4vw, 4.5rem);
+            font-weight: 900;
+            font-family: 'Space Grotesk', sans-serif;
+            letter-spacing: -0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+            opacity: 0.8;
+        }
+
+        /* ================= 8. TESTIMONIALS ================= */
+        .testimonial-card {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            padding: 2.5rem;
+            border-radius: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .stars {
+            color: var(--accent);
+            display: flex;
+            gap: 0.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-text {
+            font-size: 1.25rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            background-color: var(--border-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+        }
+
+        .author-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .author-info p {
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+
+        /* ================= 9. FAQ ================= */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item.active {
+            background-color: var(--surface-color);
+            border-color: rgba(255,255,255,0.1);
+        }
+
+        .faq-question {
+            width: 100%;
+            text-align: left;
+            padding: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--text-main);
+            font-size: 1.25rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .faq-icon {
+            transition: transform 0.3s ease;
+            color: var(--text-muted);
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+            color: var(--accent);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            padding: 0 1.5rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        /* ================= 10. CONTACT FORM ================= */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--text-muted);
+        }
+
+        .contact-method .icon-box {
+            width: 48px;
+            height: 48px;
+            background-color: var(--surface-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+        }
+
+        .form-box {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            padding: 3rem;
+            border-radius: 24px;
+            position: relative;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .input-control {
+            width: 100%;
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 1rem 1.25rem;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-control:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 1px var(--accent);
+        }
+
+        textarea.input-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            border-radius: 12px;
+        }
+
+        .form-success {
+            display: none;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .form-success .icon-box {
+            width: 80px;
+            height: 80px;
+            background-color: var(--accent-glow);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            margin: 0 auto 1.5rem;
+        }
+
+        .reset-form {
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-weight: 600;
+            margin-top: 2rem;
+            cursor: pointer;
+            text-decoration: underline;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+        }
+
+        /* ================= FOOTER ================= */
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 3rem 0;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .footer-heart {
+            color: var(--danger);
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0 0.2rem;
+        }
+
+        /* ================= ANIMATIONS (SCROLL REVEAL) ================= */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ================= MEDIA QUERIES ================= */
+        @media (max-width: 992px) {
+            .about-grid, .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .process-line {
+                display: none;
+            }
+            section {
+                padding: 5rem 0;
+            }
+            .title-huge {
+                font-size: clamp(2.5rem, 8vw, 4rem);
+            }
+            .form-box {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero-actions {
+                flex-direction: column;
+            }
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container header-content">
+            <div class="brand">
+                b<span>.</span>copy
+            </div>
+            <a href="#contato" class="nav-btn">Falar com a humana</a>
+        </div>
+    </header>
+
+    <!-- 1. HERO SECTION -->
+    <section class="hero" id="hero">
+        <div class="hero-glow"></div>
+        <div class="container reveal">
+            <div class="badge">
+                <i data-lucide="zap" fill="currentColor"></i>
+                Agenda aberta para novos projetos milionários
+            </div>
+            <h1 class="title-huge">
+                Textos que vendem até <br>
+                <span class="highlight-bg">areia no deserto.</span>
+            </h1>
+            <p class="text-lead" style="max-width: 800px; margin-left: auto; margin-right: auto;">
+                (Mas focamos no seu produto, prometo). Chega de textos com cara de manual de geladeira. Sou a copywriter que faz seu cliente rir, chorar e, o mais importante: <strong style="color: #fff; border-bottom: 1px solid var(--accent);">passar o cartão</strong>.
+            </p>
+            <div class="hero-actions">
+                <a href="#contato" class="btn btn-primary">
+                    Quero vender mais <i data-lucide="arrow-right"></i>
+                </a>
+                <a href="#portfolio" class="btn btn-secondary">
+                    Ainda tô na dúvida
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. CLIENTS SECTION -->
+    <section class="clients reveal" id="clients">
+        <div class="container">
+            <p>Empresas que já riram (de nervoso) e depois lucraram com meus textos</p>
+        </div>
+        <div class="marquee-wrapper">
+            <!-- First set -->
+            <div class="marquee-content">
+                <div class="client-logo"><i data-lucide="star"></i> TechCorp</div>
+                <div class="client-logo"><i data-lucide="star"></i> InovaPay</div>
+                <div class="client-logo"><i data-lucide="star"></i> EcoVida</div>
+                <div class="client-logo"><i data-lucide="star"></i> Agência XYZ</div>
+                <div class="client-logo"><i data-lucide="star"></i> Saúde+</div>
+                <div class="client-logo"><i data-lucide="star"></i> Financ.io</div>
+            </div>
+            <!-- Duplicated set for seamless loop -->
+            <div class="marquee-content">
+                <div class="client-logo"><i data-lucide="star"></i> TechCorp</div>
+                <div class="client-logo"><i data-lucide="star"></i> InovaPay</div>
+                <div class="client-logo"><i data-lucide="star"></i> EcoVida</div>
+                <div class="client-logo"><i data-lucide="star"></i> Agência XYZ</div>
+                <div class="client-logo"><i data-lucide="star"></i> Saúde+</div>
+                <div class="client-logo"><i data-lucide="star"></i> Financ.io</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. THE PROBLEM -->
+    <section id="problema">
+        <div class="container">
+            <div class="text-center reveal" style="text-align: center; max-width: 700px; margin: 0 auto; margin-bottom: 4rem;">
+                <h2 class="title-section" style="margin-bottom: 1rem;">Sintomas de que sua copy <br><span style="color: var(--danger);">faleceu</span></h2>
+                <p class="text-lead" style="font-size: 1.25rem;">Se você marcar mais de 2, precisamos conversar urgentemente.</p>
+            </div>
+            
+            <div class="cards-grid reveal">
+                <div class="card card-problem">
+                    <i data-lucide="frown" class="card-icon" color="#ff4b4b" size="28"></i>
+                    <h3>Taxa de clique morta</h3>
+                    <p>Sua taxa de clique em anúncios é menor do que a minha paciência para áudio de 5 minutos no WhatsApp.</p>
+                </div>
+                <div class="card card-problem">
+                    <i data-lucide="message-circle" class="card-icon" color="#ff4b4b" size="28"></i>
+                    <h3>Leads fantasmas</h3>
+                    <p>As pessoas até entram na sua página, mas somem misteriosamente como se tivessem visto assombração.</p>
+                </div>
+                <div class="card card-problem">
+                    <i data-lucide="terminal" class="card-icon" color="#ff4b4b" size="28"></i>
+                    <h3>Síndrome do Robô</h3>
+                    <p>Seus textos parecem ter sido escritos por um advogado do século XIX. Ninguém entende o benefício.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. SERVICES -->
+    <section style="background-color: var(--surface-color);" id="servicos">
+        <div class="container">
+            <div class="services-header reveal">
+                <div>
+                    <h2 class="title-section">Como eu salvo a sua <br><span class="highlight">conversão</span></h2>
+                </div>
+                <p class="text-lead">Transformo visitantes confusos em compradores impulsivos usando apenas o teclado (e muita técnica obscura de psicologia).</p>
+            </div>
+
+            <div class="cards-grid reveal">
+                <div class="service-card">
+                    <div class="service-icon-wrap"><i data-lucide="zap" size="28"></i></div>
+                    <div>
+                        <h3>Landing Pages de Alta Conversão</h3>
+                        <p style="color: var(--text-muted); line-height: 1.6;">Páginas que pegam o usuário pela mão e só soltam quando ele clica no botão de comprar.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon-wrap"><i data-lucide="mail" size="28"></i></div>
+                    <div>
+                        <h3>E-mails que as pessoas abrem</h3>
+                        <p style="color: var(--text-muted); line-height: 1.6;">Campanhas que não vão para o lixo eletrônico. Porque seus leads merecem rir antes de comprar.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon-wrap"><i data-lucide="trending-up" size="28"></i></div>
+                    <div>
+                        <h3>Anúncios (Meta & Google Ads)</h3>
+                        <p style="color: var(--text-muted); line-height: 1.6;">Textinhos minúsculos com um poder gigante de fazer o polegar do seu cliente parar de rolar o feed.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon-wrap"><i data-lucide="pen-tool" size="28"></i></div>
+                    <div>
+                        <h3>Páginas de Vendas (Long Form)</h3>
+                        <p style="color: var(--text-muted); line-height: 1.6;">Cartas de vendas tão boas que até a sua concorrência vai querer comprar o seu produto.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. ABOUT ME -->
+    <section id="sobre">
+        <div class="container about-grid reveal">
+            <div class="about-image-wrapper">
+                <div class="about-image-bg"></div>
+                <div class="about-image">
+                    <span style="font-size: 5rem; margin-bottom: 1rem;">👩🏻‍💻</span>
+                    <span style="font-family: 'Space Grotesk', sans-serif; font-size: 0.8rem; letter-spacing: 2px;">[FOTO AQUI]</span>
+                </div>
+                <div class="about-badge">
+                    Não sou IA.<br>(Eu acho).
+                </div>
+            </div>
+            
+            <div class="about-content">
+                <h2 class="title-section">Quem é a <span class="highlight" style="text-decoration: line-through; opacity: 0.5;">doida</span> profissional das palavras?</h2>
+                <p>Prazer, Brenda. Sou copywriter, estrategista e tradutora de <em style="color: #fff;">"juridiquês/tecniquês corporativo"</em> para <strong style="color: #fff;">"Português que as pessoas querem ler e comprar"</strong>.</p>
+                <p>Comecei escrevendo diários dramáticos na adolescência e hoje escrevo campanhas milionárias para empresas. (A diferença é que agora eu ganho para fazer drama focado no problema do seu cliente).</p>
+                
+                <ul class="about-list">
+                    <li><i data-lucide="check-circle-2"></i> Experiência real no campo de batalha digital.</li>
+                    <li><i data-lucide="check-circle-2"></i> Obcecada por psicologia de consumo.</li>
+                    <li><i data-lucide="check-circle-2"></i> Movida a 80% café e 20% ansiedade por resultados.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. THE PROCESS -->
+    <section style="background-color: var(--surface-color);" id="processo">
+        <div class="container">
+            <div class="text-center reveal" style="text-align: center; max-width: 700px; margin: 0 auto 4rem;">
+                <h2 class="title-section">Como a mágica acontece</h2>
+                <p class="text-lead">Spoiler: não envolve bola de cristal, envolve pesquisa pesada.</p>
+            </div>
+            
+            <div class="process-steps reveal">
+                <div class="process-line"></div>
+                
+                <div class="step-card">
+                    <div class="step-num">01</div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">O Interrogatório</h3>
+                    <p style="color: var(--text-muted); line-height: 1.6;">Você me conta tudo sobre o produto, as dores do cliente e as fofocas do nicho em um formulário profundo.</p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-num">02</div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">O Isolamento</h3>
+                    <p style="color: var(--text-muted); line-height: 1.6;">Eu sumo do mapa, coloco fones de ouvido de cancelamento de ruído e começo a fritar o cérebro escrevendo.</p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-num">03</div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">O Lançamento</h3>
+                    <p style="color: var(--text-muted); line-height: 1.6;">Te entrego o texto, você implementa, os leads começam a cair e a gente abre um champanhe (ou uma Skol).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. NUMBERS -->
+    <section class="stats-section reveal">
+        <div class="container stats-grid">
+            <div>
+                <div class="stat-num">+R$2M</div>
+                <div class="stat-label">Gerados em vendas</div>
+            </div>
+            <div>
+                <div class="stat-num">5.432</div>
+                <div class="stat-label">Cafés consumidos</div>
+            </div>
+            <div>
+                <div class="stat-num">300+</div>
+                <div class="stat-label">Textos aprovados</div>
+            </div>
+            <div>
+                <div class="stat-num">0</div>
+                <div class="stat-label">Processos judiciais (ufa!)</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. TESTIMONIALS -->
+    <section id="depoimentos">
+        <div class="container">
+            <div class="text-center reveal" style="text-align: center; margin-bottom: 4rem;">
+                <h2 class="title-section">Pessoas que não são minha mãe <br>elogiando meu trabalho</h2>
+            </div>
+            
+            <div class="cards-grid reveal">
+                <div class="testimonial-card">
+                    <div>
+                        <div class="stars">
+                            <i data-lucide="star" fill="currentColor" size="18"></i>
+                            <i data-lucide="star" fill="currentColor" size="18"></i>
+                            <i data-lucide="star" fill="currentColor" size="18"></i>
+                            <i data-lucide="star" fill="currentColor" size="18"></i>
+                            <i data-lucide="star" fill="currentColor" size="18"></i>
+                        </div>
+                        <p class="testimonial-text">"A Brenda consegue colocar em palavras exatas o que eu sinto, mas não sei explicar. Os e-mails que ela escreveu tiveram 45% de taxa de abertura. Surreal."</p>
+                    </div>
+                    <div class="author">
+                        <div class="author-avatar">M</div>
+                        <div class="author-info">
+                            <h4>Maria Fernanda</h4>
+                            <p>Especialista em Marketing</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div>
+                        <div class="stars">
+                            <i data-lucide="star" fill="currentColor" size="18"></i>
+                            <i data-lucide="star" fill="currentColor" size="18"></i>
+                            <i data-lucide="star" fill="currentColor" size="18"></i>
+                            <i data-lucide="star" fill="currentColor" size="18"></i>
+                            <i data-lucide="star" fill="currentColor" size="18"></i>
+                        </div>
+                        <p class="testimonial-text">"Profissional, rápida e tem um senso de humor que deixa a copy leve mas absurdamente persuasiva. Só não a contratem muito porque eu preciso dela livre pros meus projetos."</p>
+                    </div>
+                    <div class="author">
+                        <div class="author-avatar">C</div>
+                        <div class="author-info">
+                            <h4>Carlos Eduardo</h4>
+                            <p>Produtor Digital</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. FAQ -->
+    <section style="background-color: var(--surface-color); border-top: 1px solid var(--border-color);" id="faq">
+        <div class="container reveal">
+            <div class="text-center" style="text-align: center; margin-bottom: 3rem;">
+                <h2 class="title-section">Perguntas que eu cansei de <br>responder no WhatsApp</h2>
+            </div>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Você escreve para qualquer nicho?
+                        <i data-lucide="chevron-down" class="faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p style="padding-bottom: 1.5rem;">Quase todos. Só não me peça para vender esquema de pirâmide ou curso de como ficar rico assistindo vídeos. Meu talento tem limites éticos (e jurídicos).</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Qual o prazo de entrega?
+                        <i data-lucide="chevron-down" class="faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p style="padding-bottom: 1.5rem;">Depende do tamanho do projeto e de quanta cafeína eu tenho no sangue. Mas, geralmente, entre 3 a 7 dias úteis. Milagres demoram 10.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        E se eu não gostar do texto?
+                        <i data-lucide="chevron-down" class="faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p style="padding-bottom: 1.5rem;">Nós temos rodadas de refação. Se você ainda não gostar, a gente chora junto, eu ajusto de novo até você olhar e dizer: 'Caramba, eu compraria isso!'.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Por que eu não uso o ChatGPT para escrever?
+                        <i data-lucide="chevron-down" class="faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p style="padding-bottom: 1.5rem;">Pode usar! Se você quiser soar como um robô corporativo de 1998 desejando 'espero que este e-mail o encontre bem', fique à vontade. Se quiser persuadir humanos, me chama.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. CONTACT FORM -->
+    <section id="contato">
+        <div class="container contact-grid reveal">
+            <div>
+                <h2 class="title-huge">Mande um sinal de fumaça. <br><span style="color: var(--text-muted);">Ou preencha o form.</span></h2>
+                <p class="text-lead" style="margin-bottom: 1rem;">
+                    Pronto para parar de perder dinheiro com textos ruins? Preencha o formulário e me conte sobre o seu projeto. Prometo não mandar spam.
+                </p>
+                
+                <div class="contact-info">
+                    <div class="contact-method">
+                        <div class="icon-box"><i data-lucide="mail"></i></div>
+                        <span>oi@brendacopy.com.br</span>
+                    </div>
+                    <div class="contact-method">
+                        <div class="icon-box"><i data-lucide="coffee"></i></div>
+                        <span>Respondendo entre um café e outro.</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-box">
+                <!-- Estado do Formulário -->
+                <form id="contactForm">
+                    <div class="input-group">
+                        <label>Como sua mãe te chama?</label>
+                        <input type="text" class="input-control" placeholder="Seu nome completo" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Seu melhor e-mail (não vale o do bol.com.br)</label>
+                        <input type="email" class="input-control" placeholder="nome@empresa.com" required>
+                    </div>
+                    <div class="input-group">
+                        <label>O que está tirando seu sono? (Seu projeto)</label>
+                        <textarea class="input-control" placeholder="Preciso de uma landing page que converta água em vinho..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-submit" id="submitBtn">
+                        Salvar minhas conversões agora
+                    </button>
+                </form>
+
+                <!-- Estado de Sucesso (Oculto inicialmente) -->
+                <div class="form-success" id="successState">
+                    <div class="icon-box">
+                        <i data-lucide="check-circle-2" size="40"></i>
+                    </div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; font-family: 'Space Grotesk', sans-serif;">Mensagem enviada!</h3>
+                    <p style="color: var(--text-muted);">Vou ler, dar uma risadinha, pensar na estratégia e te respondo o mais rápido possível.</p>
+                    <button class="reset-form" id="resetBtn">Mandar outra mensagem</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p>
+                Feito com <i data-lucide="heart" class="footer-heart" size="14" fill="currentColor"></i>, café e ansiedade por Brenda.Copy &copy; 2024
+            </p>
+            <p style="margin-top: 0.5rem; opacity: 0.6;">Qualquer semelhança com a realidade de um copywriter não é mera coincidência.</p>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script>
+        // Inicializar ícones da Lucide
+        lucide.createIcons();
+
+        // Lógica do Accordion FAQ
+        const faqItems = document.querySelectorAll('.faq-item');
+        
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            
+            question.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                
+                // Fechar todos
+                faqItems.forEach(otherItem => {
+                    otherItem.classList.remove('active');
+                    otherItem.querySelector('.faq-answer').style.maxHeight = null;
+                });
+
+                // Se não estava ativo, abre
+                if (!isActive) {
+                    item.classList.add('active');
+                    const answer = item.querySelector('.faq-answer');
+                    answer.style.maxHeight = answer.scrollHeight + "px";
+                }
+            });
+        });
+
+        // Simulação do Envio do Formulário
+        const form = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const successState = document.getElementById('successState');
+        const resetBtn = document.getElementById('resetBtn');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Estado de carregamento
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i data-lucide="loader" class="spin"></i> Enviando pombos correios...';
+            submitBtn.style.opacity = '0.7';
+            submitBtn.style.pointerEvents = 'none';
+            lucide.createIcons(); // Recarrega o ícone novo
+
+            // Simula delay de rede
+            setTimeout(() => {
+                form.style.display = 'none';
+                successState.style.display = 'block';
+                
+                // Restaura o botão para a próxima vez
+                submitBtn.innerHTML = originalText;
+                submitBtn.style.opacity = '1';
+                submitBtn.style.pointerEvents = 'auto';
+                form.reset();
+            }, 1500);
+        });
+
+        resetBtn.addEventListener('click', () => {
+            successState.style.display = 'none';
+            form.style.display = 'block';
+        });
+
+        // Animação de Scroll Reveal
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100; // Ponto de aparição
+
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+
+        window.addEventListener("scroll", reveal);
+        // Dispara uma vez no load
+        reveal();
+    </script>
+</body>
+</html>
