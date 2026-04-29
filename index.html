@@ -264,7 +264,7 @@
             flex-wrap: wrap;
         }
 
-        /* ================= 2. PORTFOLIO SCROLL ================= */
+        /* ================= 2. PORTFOLIO SCROLL (NEW) ================= */
         .portfolio-section {
             padding: 6rem 0 8rem 0;
             background-color: var(--surface-color);
@@ -327,11 +327,11 @@
         }
 
         .scroll-left .marquee-group {
-            animation: scrollLeft 35s linear infinite;
+            animation: scrollLeft 30s linear infinite;
         }
 
         .scroll-right .marquee-group {
-            animation: scrollRight 35s linear infinite;
+            animation: scrollRight 30s linear infinite;
         }
 
         .portfolio-track:hover .marquee-group {
@@ -339,7 +339,7 @@
         }
 
         .portfolio-item {
-            width: clamp(340px, 30vw, 500px); /* Imagens maiores */
+            width: clamp(340px, 30vw, 500px); /* Imagens 20% maiores */
             border-radius: 16px;
             overflow: hidden;
             border: 1px solid var(--border-color);
@@ -539,79 +539,49 @@
             color: var(--accent);
         }
 
-        /* ================= 6. PROCESS (TIMELINE) ================= */
-        .timeline {
+        /* ================= 6. PROCESS ================= */
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
             position: relative;
-            max-width: 800px;
-            margin: 0 auto;
         }
 
-        .timeline::before {
-            content: '';
+        .process-line {
             position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 24px;
-            width: 2px;
-            background: linear-gradient(to bottom, var(--accent), transparent);
+            top: 40px;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--border-color), transparent);
             z-index: 0;
         }
 
-        .timeline-item {
+        .step-card {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            padding: 3rem 2rem;
+            border-radius: 24px;
+            text-align: center;
             position: relative;
-            margin-bottom: 3rem;
-            padding-left: 5rem;
             z-index: 1;
         }
 
-        .timeline-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .timeline-dot {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 48px;
-            height: 48px;
-            background-color: var(--accent); /* Fundo agora tem a cor da linha */
+        .step-num {
+            width: 80px;
+            height: 80px;
+            background-color: var(--bg-color);
             border: 2px solid var(--accent);
-            color: #000; /* Número agora está escuro */
+            color: var(--accent);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.25rem;
+            font-size: 1.5rem;
             font-family: var(--font-title);
             font-weight: 900;
+            margin: 0 auto 2rem;
             box-shadow: 0 0 20px var(--accent-glow);
-        }
-
-        .timeline-content {
-            background-color: var(--surface-color);
-            border: 1px solid var(--border-color);
-            padding: 2.5rem;
-            border-radius: 24px;
-            transition: all 0.4s ease;
-        }
-
-        .timeline-content:hover {
-            transform: translateY(-5px);
-            border-color: rgba(255, 255, 255, 0.1);
-            background-color: var(--surface-hover);
-        }
-
-        .timeline-content h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            font-family: var(--font-title);
-            font-weight: 700;
-        }
-
-        .timeline-content p {
-            color: var(--text-muted);
-            line-height: 1.6;
-            font-size: 1.1rem;
         }
 
         /* ================= 7. STATS ================= */
@@ -887,20 +857,14 @@
         /* ================= ANIMATIONS (SCROLL REVEAL) ================= */
         .reveal {
             opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
         }
 
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
-
-        /* Delays para animação em cascata (aparecendo aos poucos) */
-        .delay-100 { transition-delay: 100ms; }
-        .delay-200 { transition-delay: 200ms; }
-        .delay-300 { transition-delay: 300ms; }
-        .delay-400 { transition-delay: 400ms; }
 
         /* ================= MEDIA QUERIES ================= */
         @media (max-width: 992px) {
@@ -932,9 +896,6 @@
             }
             .form-box {
                 padding: 2rem;
-            }
-            .timeline::before {
-                left: 24px;
             }
         }
 
@@ -972,19 +933,19 @@
     <!-- 1. HERO SECTION -->
     <section class="hero" id="hero">
         <div class="hero-glow"></div>
-        <div class="container">
-            <div class="badge reveal">
+        <div class="container reveal">
+            <div class="badge">
                 <i data-lucide="zap" fill="currentColor"></i>
                 Agenda aberta para novos projetos milionários
             </div>
-            <h1 class="title-huge reveal delay-100">
+            <h1 class="title-huge">
                 Textos que vendem até <br>
                 <span class="highlight-bg">areia no deserto.</span>
             </h1>
-            <p class="text-lead reveal delay-200" style="max-width: 800px; margin-left: auto; margin-right: auto;">
+            <p class="text-lead" style="max-width: 800px; margin-left: auto; margin-right: auto;">
                 (Mas focamos no seu produto, prometo). Chega de textos com cara de manual de geladeira. Sou a copywriter que faz seu cliente rir, chorar e, o mais importante: <strong style="color: #fff; border-bottom: 1px solid var(--accent);">passar o cartão</strong>.
             </p>
-            <div class="hero-actions reveal delay-300">
+            <div class="hero-actions">
                 <a href="#contato" class="btn btn-primary">
                     Quero vender mais <i data-lucide="arrow-right"></i>
                 </a>
@@ -997,15 +958,15 @@
 
     <!-- 2. PORTFOLIO SECTION -->
     <section class="portfolio-section" id="portfolio">
-        <div class="container">
-            <div class="portfolio-header reveal">
+        <div class="container reveal">
+            <div class="portfolio-header">
                 <h2>Projetos que pararam o <span class="serif-italic" style="color: var(--accent-cyan);">scroll</span> e bateram metas.</h2>
                 <p>Empresas que já riram (de nervoso) e depois lucraram com meus textos</p>
             </div>
         </div>
         
-        <div class="portfolio-track-container reveal delay-100">
-            <!-- ROW 1 (Scrolls Right) - Agora com 5 imagens únicas -->
+        <div class="portfolio-track-container reveal">
+            <!-- ROW 1 (Scrolls Right) -->
             <div class="portfolio-track scroll-right">
                 <!-- Grupo 1 -->
                 <div class="marquee-group">
@@ -1013,7 +974,6 @@
                     <div class="portfolio-item"><img src="imageye___-_imgi_107_sushi-website-1.webp" alt="Portfolio 2" loading="lazy"></div>
                     <div class="portfolio-item"><img src="imageye___-_imgi_92_yard-website.webp" alt="Portfolio 3" loading="lazy"></div>
                     <div class="portfolio-item"><img src="imageye___-_imgi_95_website-1.webp" alt="Portfolio 4" loading="lazy"></div>
-                    <div class="portfolio-item"><img src="cacao.webp" alt="Portfolio 5" loading="lazy"></div> <!-- NOVA IMAGEM 1 -->
                 </div>
                 <!-- Grupo 2 (Duplicado para o loop contínuo) -->
                 <div class="marquee-group" aria-hidden="true">
@@ -1021,7 +981,6 @@
                     <div class="portfolio-item"><img src="imageye___-_imgi_107_sushi-website-1.webp" alt="Portfolio 2" loading="lazy"></div>
                     <div class="portfolio-item"><img src="imageye___-_imgi_92_yard-website.webp" alt="Portfolio 3" loading="lazy"></div>
                     <div class="portfolio-item"><img src="imageye___-_imgi_95_website-1.webp" alt="Portfolio 4" loading="lazy"></div>
-                    <div class="portfolio-item"><img src="cacao.webp" alt="Portfolio 5" loading="lazy"></div> <!-- NOVA IMAGEM 1 -->
                 </div>
                 <!-- Grupo 3 (Duplicado p/ monitores Ultra-Wide) -->
                 <div class="marquee-group" aria-hidden="true">
@@ -1029,35 +988,31 @@
                     <div class="portfolio-item"><img src="imageye___-_imgi_107_sushi-website-1.webp" alt="Portfolio 2" loading="lazy"></div>
                     <div class="portfolio-item"><img src="imageye___-_imgi_92_yard-website.webp" alt="Portfolio 3" loading="lazy"></div>
                     <div class="portfolio-item"><img src="imageye___-_imgi_95_website-1.webp" alt="Portfolio 4" loading="lazy"></div>
-                    <div class="portfolio-item"><img src="cacao.webp" alt="Portfolio 5" loading="lazy"></div> <!-- NOVA IMAGEM 1 -->
                 </div>
             </div>
 
-            <!-- ROW 2 (Scrolls Left) - Agora com 5 imagens únicas -->
+            <!-- ROW 2 (Scrolls Left) -->
             <div class="portfolio-track scroll-left">
                 <!-- Grupo 1 -->
                 <div class="marquee-group">
-                    <div class="portfolio-item"><img src="imageye___-_imgi_113_noeme-website-2.webp" alt="Portfolio 6" loading="lazy"></div>
-                    <div class="portfolio-item"><img src="imageye___-_imgi_101_P-Editor-Website.webp" alt="Portfolio 7" loading="lazy"></div>
-                    <div class="portfolio-item"><img src="imageye___-_imgi_110_website-6.webp" alt="Portfolio 8" loading="lazy"></div>
-                    <div class="portfolio-item"><img src="imageye___-_imgi_98_website-2.webp" alt="Portfolio 9" loading="lazy"></div>
-                    <div class="portfolio-item"><img src="sten.webp" alt="Portfolio 10" loading="lazy"></div> <!-- NOVA IMAGEM 2 -->
+                    <div class="portfolio-item"><img src="imageye___-_imgi_113_noeme-website-2.webp" alt="Portfolio 5" loading="lazy"></div>
+                    <div class="portfolio-item"><img src="imageye___-_imgi_101_P-Editor-Website.webp" alt="Portfolio 6" loading="lazy"></div>
+                    <div class="portfolio-item"><img src="imageye___-_imgi_110_website-6.webp" alt="Portfolio 7" loading="lazy"></div>
+                    <div class="portfolio-item"><img src="imageye___-_imgi_98_website-2.webp" alt="Portfolio 8" loading="lazy"></div>
                 </div>
                 <!-- Grupo 2 (Duplicado para o loop contínuo) -->
                 <div class="marquee-group" aria-hidden="true">
-                    <div class="portfolio-item"><img src="imageye___-_imgi_113_noeme-website-2.webp" alt="Portfolio 6" loading="lazy"></div>
-                    <div class="portfolio-item"><img src="imageye___-_imgi_101_P-Editor-Website.webp" alt="Portfolio 7" loading="lazy"></div>
-                    <div class="portfolio-item"><img src="imageye___-_imgi_110_website-6.webp" alt="Portfolio 8" loading="lazy"></div>
-                    <div class="portfolio-item"><img src="imageye___-_imgi_98_website-2.webp" alt="Portfolio 9" loading="lazy"></div>
-                    <div class="portfolio-item"><img src="sten.webp" alt="Portfolio 10" loading="lazy"></div> <!-- NOVA IMAGEM 2 -->
+                    <div class="portfolio-item"><img src="imageye___-_imgi_113_noeme-website-2.webp" alt="Portfolio 5" loading="lazy"></div>
+                    <div class="portfolio-item"><img src="imageye___-_imgi_101_P-Editor-Website.webp" alt="Portfolio 6" loading="lazy"></div>
+                    <div class="portfolio-item"><img src="imageye___-_imgi_110_website-6.webp" alt="Portfolio 7" loading="lazy"></div>
+                    <div class="portfolio-item"><img src="imageye___-_imgi_98_website-2.webp" alt="Portfolio 8" loading="lazy"></div>
                 </div>
                 <!-- Grupo 3 (Duplicado p/ monitores Ultra-Wide) -->
                 <div class="marquee-group" aria-hidden="true">
-                    <div class="portfolio-item"><img src="imageye___-_imgi_113_noeme-website-2.webp" alt="Portfolio 6" loading="lazy"></div>
-                    <div class="portfolio-item"><img src="imageye___-_imgi_101_P-Editor-Website.webp" alt="Portfolio 7" loading="lazy"></div>
-                    <div class="portfolio-item"><img src="imageye___-_imgi_110_website-6.webp" alt="Portfolio 8" loading="lazy"></div>
-                    <div class="portfolio-item"><img src="imageye___-_imgi_98_website-2.webp" alt="Portfolio 9" loading="lazy"></div>
-                    <div class="portfolio-item"><img src="sten.webp" alt="Portfolio 10" loading="lazy"></div> <!-- NOVA IMAGEM 2 -->
+                    <div class="portfolio-item"><img src="imageye___-_imgi_113_noeme-website-2.webp" alt="Portfolio 5" loading="lazy"></div>
+                    <div class="portfolio-item"><img src="imageye___-_imgi_101_P-Editor-Website.webp" alt="Portfolio 6" loading="lazy"></div>
+                    <div class="portfolio-item"><img src="imageye___-_imgi_110_website-6.webp" alt="Portfolio 7" loading="lazy"></div>
+                    <div class="portfolio-item"><img src="imageye___-_imgi_98_website-2.webp" alt="Portfolio 8" loading="lazy"></div>
                 </div>
             </div>
         </div>
@@ -1066,24 +1021,23 @@
     <!-- 3. THE PROBLEM -->
     <section id="problema">
         <div class="container">
-            <div class="text-center reveal" style="text-align: center; max-width: 800px; margin: 0 auto; margin-bottom: 4rem;">
-                <!-- Quebra de linha manual removida para não quebrar a palavra COPY sozinha -->
-                <h2 class="title-section" style="margin-bottom: 1rem;">Sintomas de que sua copy <span class="serif-italic" style="color: var(--danger);">faleceu</span></h2>
+            <div class="text-center reveal" style="text-align: center; max-width: 700px; margin: 0 auto; margin-bottom: 4rem;">
+                <h2 class="title-section" style="margin-bottom: 1rem;">Sintomas de que sua copy <br><span class="serif-italic" style="color: var(--danger);">faleceu</span></h2>
                 <p class="text-lead" style="font-size: 1.25rem;">Se você marcar mais de 2, precisamos conversar urgentemente.</p>
             </div>
             
-            <div class="cards-grid">
-                <div class="card card-problem reveal delay-100">
+            <div class="cards-grid reveal">
+                <div class="card card-problem">
                     <i data-lucide="frown" class="card-icon" color="#ff4b4b" size="28"></i>
                     <h3>Taxa de clique morta</h3>
                     <p>Sua taxa de clique em anúncios é menor do que a minha paciência para áudio de 5 minutos no WhatsApp.</p>
                 </div>
-                <div class="card card-problem reveal delay-200">
+                <div class="card card-problem">
                     <i data-lucide="message-circle" class="card-icon" color="#ff4b4b" size="28"></i>
                     <h3>Leads fantasmas</h3>
                     <p>As pessoas até entram na sua página, mas somem misteriosamente como se tivessem visto assombração.</p>
                 </div>
-                <div class="card card-problem reveal delay-300">
+                <div class="card card-problem">
                     <i data-lucide="terminal" class="card-icon" color="#ff4b4b" size="28"></i>
                     <h3>Síndrome do Robô</h3>
                     <p>Seus textos parecem ter sido escritos por um advogado do século XIX. Ninguém entende o benefício.</p>
@@ -1094,35 +1048,35 @@
 
     <!-- 4. SERVICES -->
     <section style="background-color: var(--surface-color);" id="servicos">
-        <div class="container services-container">
-            <div class="services-info reveal">
+        <div class="container services-container reveal">
+            <div class="services-info">
                 <h2 class="title-section">Como eu salvo a sua <br><span class="highlight">conversão</span></h2>
                 <p class="text-lead">Transformo visitantes confusos em compradores impulsivos usando apenas o teclado (e muita técnica obscura de psicologia).</p>
             </div>
 
             <div class="services-grid">
-                <div class="service-card reveal delay-100">
+                <div class="service-card">
                     <div class="service-icon-wrap"><i data-lucide="zap" size="28"></i></div>
                     <div>
                         <h3>Landing Pages de Alta Conversão</h3>
                         <p style="color: var(--text-muted); line-height: 1.6;">Páginas que pegam o usuário pela mão e só soltam quando ele clica no botão de comprar.</p>
                     </div>
                 </div>
-                <div class="service-card reveal delay-200">
+                <div class="service-card">
                     <div class="service-icon-wrap"><i data-lucide="mail" size="28"></i></div>
                     <div>
                         <h3>E-mails que as pessoas abrem</h3>
                         <p style="color: var(--text-muted); line-height: 1.6;">Campanhas que não vão para o lixo eletrônico. Porque seus leads merecem rir antes de comprar.</p>
                     </div>
                 </div>
-                <div class="service-card reveal delay-300">
+                <div class="service-card">
                     <div class="service-icon-wrap"><i data-lucide="trending-up" size="28"></i></div>
                     <div>
                         <h3>Anúncios (Meta & Google Ads)</h3>
                         <p style="color: var(--text-muted); line-height: 1.6;">Textinhos minúsculos com um poder gigante de fazer o polegar do seu cliente parar de rolar o feed.</p>
                     </div>
                 </div>
-                <div class="service-card reveal delay-400">
+                <div class="service-card">
                     <div class="service-icon-wrap"><i data-lucide="pen-tool" size="28"></i></div>
                     <div>
                         <h3>Páginas de Vendas (Long Form)</h3>
@@ -1135,8 +1089,8 @@
 
     <!-- 5. ABOUT ME -->
     <section id="sobre">
-        <div class="container about-grid">
-            <div class="about-image-wrapper reveal">
+        <div class="container about-grid reveal">
+            <div class="about-image-wrapper">
                 <div class="about-image-bg"></div>
                 <div class="about-image">
                     <span style="font-size: 5rem; margin-bottom: 1rem;">👩🏻‍💻</span>
@@ -1147,7 +1101,7 @@
             </div>
         </div>
         
-        <div class="about-content reveal delay-200">
+        <div class="about-content">
             <h2 class="title-section">Quem é a <span class="highlight"><span style="text-decoration: line-through; opacity: 0.5;">doida</span> profissional</span> das palavras?</h2>
             <p>Prazer, Brenda. Sou copywriter, estrategista e tradutora de <em style="color: #fff;">"juridiquês/tecniquês corporativo"</em> para <strong style="color: #fff;">"Português que as pessoas querem ler e comprar"</strong>.</p>
             <p>Comecei escrevendo diários dramáticos na adolescência e hoje escrevo campanhas milionárias para empresas. (A diferença é que agora eu ganho para fazer drama focado no problema do seu cliente).</p>
@@ -1161,60 +1115,54 @@
         </div>
     </section>
 
-    <!-- 6. THE PROCESS (TIMELINE) -->
+    <!-- 6. THE PROCESS -->
     <section style="background-color: var(--surface-color);" id="processo">
         <div class="container">
-            <div class="text-center reveal" style="text-align: center; max-width: 700px; margin: 0 auto; margin-bottom: 4rem;">
+            <div class="text-center reveal" style="text-align: center; max-width: 700px; margin: 0 auto 4rem;">
                 <h2 class="title-section">Como a <span class="serif-italic" style="color: var(--accent-cyan);">mágica</span> acontece</h2>
                 <p class="text-lead">Spoiler: não envolve bola de cristal, envolve pesquisa pesada.</p>
             </div>
             
-            <div class="timeline">
+            <div class="process-steps reveal">
+                <div class="process-line"></div>
                 
-                <div class="timeline-item reveal delay-100">
-                    <div class="timeline-dot">01</div>
-                    <div class="timeline-content">
-                        <h3>O Interrogatório</h3>
-                        <p>Você me conta tudo sobre o produto, as dores do cliente e as fofocas do nicho em um formulário profundo.</p>
-                    </div>
+                <div class="step-card">
+                    <div class="step-num">01</div>
+                    <h3 style="font-size: 1.8rem; margin-bottom: 1rem;">O Interrogatório</h3>
+                    <p style="color: var(--text-muted); line-height: 1.6;">Você me conta tudo sobre o produto, as dores do cliente e as fofocas do nicho em um formulário profundo.</p>
                 </div>
                 
-                <div class="timeline-item reveal delay-200">
-                    <div class="timeline-dot">02</div>
-                    <div class="timeline-content">
-                        <h3>O Isolamento</h3>
-                        <p>Eu sumo do mapa, coloco fones de ouvido de cancelamento de ruído e começo a fritar o cérebro escrevendo.</p>
-                    </div>
+                <div class="step-card">
+                    <div class="step-num">02</div>
+                    <h3 style="font-size: 1.8rem; margin-bottom: 1rem;">O Isolamento</h3>
+                    <p style="color: var(--text-muted); line-height: 1.6;">Eu sumo do mapa, coloco fones de ouvido de cancelamento de ruído e começo a fritar o cérebro escrevendo.</p>
                 </div>
                 
-                <div class="timeline-item reveal delay-300">
-                    <div class="timeline-dot">03</div>
-                    <div class="timeline-content">
-                        <h3>O Lançamento</h3>
-                        <p>Te entrego o texto, você implementa, os leads começam a cair e a gente abre um champanhe (ou uma Skol).</p>
-                    </div>
+                <div class="step-card">
+                    <div class="step-num">03</div>
+                    <h3 style="font-size: 1.8rem; margin-bottom: 1rem;">O Lançamento</h3>
+                    <p style="color: var(--text-muted); line-height: 1.6;">Te entrego o texto, você implementa, os leads começam a cair e a gente abre um champanhe (ou uma Skol).</p>
                 </div>
-
             </div>
         </div>
     </section>
 
     <!-- 7. NUMBERS -->
-    <section class="stats-section">
+    <section class="stats-section reveal">
         <div class="container stats-grid">
-            <div class="reveal">
+            <div>
                 <div class="stat-num">+R$2M</div>
                 <div class="stat-label">Gerados em vendas</div>
             </div>
-            <div class="reveal delay-100">
+            <div>
                 <div class="stat-num">5.432</div>
                 <div class="stat-label">Cafés consumidos</div>
             </div>
-            <div class="reveal delay-200">
+            <div>
                 <div class="stat-num">300+</div>
                 <div class="stat-label">Textos aprovados</div>
             </div>
-            <div class="reveal delay-300">
+            <div>
                 <div class="stat-num">0</div>
                 <div class="stat-label">Processos judiciais (ufa!)</div>
             </div>
@@ -1228,8 +1176,8 @@
                 <h2 class="title-section">Pessoas que não são minha mãe <br><span class="serif-italic" style="color: var(--accent-pink);">elogiando</span> meu trabalho</h2>
             </div>
             
-            <div class="cards-grid">
-                <div class="testimonial-card reveal delay-100">
+            <div class="cards-grid reveal">
+                <div class="testimonial-card">
                     <div>
                         <div class="stars">
                             <i data-lucide="star" fill="currentColor" size="18"></i>
@@ -1249,7 +1197,7 @@
                     </div>
                 </div>
                 
-                <div class="testimonial-card reveal delay-200">
+                <div class="testimonial-card">
                     <div>
                         <div class="stars">
                             <i data-lucide="star" fill="currentColor" size="18"></i>
@@ -1274,13 +1222,13 @@
 
     <!-- 9. FAQ -->
     <section style="background-color: var(--surface-color); border-top: 1px solid var(--border-color);" id="faq">
-        <div class="container">
-            <div class="text-center reveal" style="text-align: center; margin-bottom: 3rem;">
+        <div class="container reveal">
+            <div class="text-center" style="text-align: center; margin-bottom: 3rem;">
                 <h2 class="title-section"><span class="serif-italic" style="color: var(--accent-purple);">Perguntas</span> que eu cansei de <br>responder no WhatsApp</h2>
             </div>
             
             <div class="faq-container">
-                <div class="faq-item reveal delay-100">
+                <div class="faq-item">
                     <button class="faq-question">
                         Você escreve para qualquer nicho?
                         <i data-lucide="chevron-down" class="faq-icon"></i>
@@ -1290,7 +1238,7 @@
                     </div>
                 </div>
                 
-                <div class="faq-item reveal delay-200">
+                <div class="faq-item">
                     <button class="faq-question">
                         Qual o prazo de entrega?
                         <i data-lucide="chevron-down" class="faq-icon"></i>
@@ -1300,7 +1248,7 @@
                     </div>
                 </div>
                 
-                <div class="faq-item reveal delay-300">
+                <div class="faq-item">
                     <button class="faq-question">
                         E se eu não gostar do texto?
                         <i data-lucide="chevron-down" class="faq-icon"></i>
@@ -1310,7 +1258,7 @@
                     </div>
                 </div>
                 
-                <div class="faq-item reveal delay-400">
+                <div class="faq-item">
                     <button class="faq-question">
                         Por que eu não uso o ChatGPT para escrever?
                         <i data-lucide="chevron-down" class="faq-icon"></i>
@@ -1325,10 +1273,9 @@
 
     <!-- 10. CONTACT FORM -->
     <section id="contato">
-        <div class="container contact-grid">
-            <div class="reveal">
-                <!-- Alterado de title-huge para title-section e quebra de linha manual removida -->
-                <h2 class="title-section" style="margin-bottom: 1rem;">Mande um sinal de fumaça. <span class="serif-italic" style="color: var(--accent-yellow);">Ou preencha o form.</span></h2>
+        <div class="container contact-grid reveal">
+            <div>
+                <h2 class="title-huge">Mande um sinal de fumaça. <br><span class="serif-italic" style="color: var(--accent-yellow);">Ou preencha o form.</span></h2>
                 <p class="text-lead" style="margin-bottom: 1rem;">
                     Pronto para parar de perder dinheiro com textos ruins? Preencha o formulário e me conte sobre o seu projeto. Prometo não mandar spam.
                 </p>
@@ -1345,7 +1292,7 @@
                 </div>
             </div>
             
-            <div class="form-box reveal delay-200">
+            <div class="form-box">
                 <!-- Estado do Formulário -->
                 <form id="contactForm">
                     <div class="input-group">
@@ -1380,7 +1327,7 @@
 
     <!-- FOOTER -->
     <footer>
-        <div class="container reveal">
+        <div class="container">
             <p>
                 Feito com <i data-lucide="heart" class="footer-heart" size="14" fill="currentColor"></i>, café e ansiedade por Brenda.Copy &copy; <span id="currentYear"></span>
             </p>
@@ -1463,13 +1410,18 @@
             }, 1000);
         });
 
-        // Animação de Scroll Reveal em Cascata
+        resetBtn.addEventListener('click', () => {
+            successState.style.display = 'none';
+            form.style.display = 'block';
+        });
+
+        // Animação de Scroll Reveal
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
                 var windowHeight = window.innerHeight;
                 var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 50; // Gatilho rápido para a cascata funcionar melhor
+                var elementVisible = 100; // Ponto de aparição
 
                 if (elementTop < windowHeight - elementVisible) {
                     reveals[i].classList.add("active");
