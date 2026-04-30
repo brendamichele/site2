@@ -44,17 +44,20 @@
             box-sizing: border-box;
         }
 
+        /* Atenção: 'overflow-x: hidden' bloqueia o position: sticky. 
+           Usamos 'overflow-x: clip' para evitar scroll lateral indesejado sem quebrar o efeito.
+        */
         html {
             scroll-behavior: smooth;
             font-family: var(--font-body);
             background-color: var(--bg-color);
             color: var(--text-main);
-            overflow-x: hidden;
+            overflow-x: clip; 
             transition: font-family 0.3s ease;
         }
 
         body {
-            overflow-x: hidden;
+            overflow-x: clip;
             font-size: 1.125rem;
         }
 
@@ -196,12 +199,20 @@
 
         .brand {
             font-size: 1.8rem;
-            font-weight: 900;
-            font-family: var(--font-serif);
-            font-style: italic;
+            display: inline-flex;
+            align-items: baseline;
         }
 
-        .brand span {
+        .brand .brenda {
+            font-family: var(--font-title);
+            font-weight: 900;
+            color: var(--text-main);
+        }
+
+        .brand .copy {
+            font-family: var(--font-serif);
+            font-weight: 900;
+            font-style: italic;
             color: var(--accent);
         }
 
@@ -264,7 +275,7 @@
             flex-wrap: wrap;
         }
 
-        /* ================= 2. PORTFOLIO SCROLL (NEW) ================= */
+        /* ================= 2. PORTFOLIO SCROLL ================= */
         .portfolio-section {
             padding: 6rem 0 8rem 0;
             background-color: var(--surface-color);
@@ -305,7 +316,6 @@
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
-            /* Faz o slider vazar para as bordas da tela ignorando o container */
             width: 100vw;
             position: relative;
             left: 50%;
@@ -326,20 +336,13 @@
             flex-shrink: 0;
         }
 
-        .scroll-left .marquee-group {
-            animation: scrollLeft 30s linear infinite;
-        }
+        .scroll-left .marquee-group { animation: scrollLeft 30s linear infinite; }
+        .scroll-right .marquee-group { animation: scrollRight 30s linear infinite; }
 
-        .scroll-right .marquee-group {
-            animation: scrollRight 30s linear infinite;
-        }
-
-        .portfolio-track:hover .marquee-group {
-            animation-play-state: paused;
-        }
+        .portfolio-track:hover .marquee-group { animation-play-state: paused; }
 
         .portfolio-item {
-            width: clamp(340px, 30vw, 500px); /* Imagens 20% maiores */
+            width: clamp(340px, 30vw, 500px);
             border-radius: 16px;
             overflow: hidden;
             border: 1px solid var(--border-color);
@@ -384,14 +387,9 @@
             background-color: var(--surface-hover);
         }
 
-        .card-problem:hover {
-            border-color: rgba(255, 75, 75, 0.4);
-        }
+        .card-problem:hover { border-color: rgba(255, 75, 75, 0.4); }
 
-        .card-icon {
-            margin-bottom: 1.5rem;
-            display: inline-block;
-        }
+        .card-icon { margin-bottom: 1.5rem; display: inline-block; }
 
         .card h3 {
             font-size: 1.8rem;
@@ -409,24 +407,18 @@
         /* ================= 4. SERVICES ================= */
         .services-container {
             display: grid;
-            grid-template-columns: 1fr 1.5fr; /* 1 parte para info, 1.5 partes pros cards na direita */
+            grid-template-columns: 1fr 1.5fr;
             gap: 4rem;
             align-items: start;
         }
 
         .services-info {
             position: sticky;
-            top: 120px; /* Faz o título acompanhar o scroll caso a tela seja pequena */
+            top: 120px;
         }
 
-        .services-info .title-section {
-            margin-bottom: 1.5rem;
-        }
-
-        .services-info .text-lead {
-            margin-bottom: 0;
-            max-width: 450px;
-        }
+        .services-info .title-section { margin-bottom: 1.5rem; }
+        .services-info .text-lead { margin-bottom: 0; max-width: 450px; }
 
         .services-grid {
             display: grid;
@@ -516,9 +508,7 @@
             line-height: 1.7;
         }
 
-        .about-list {
-            margin-top: 2rem;
-        }
+        .about-list { margin-top: 2rem; }
 
         .about-list li {
             display: flex;
@@ -528,9 +518,7 @@
             font-size: 1.2rem;
         }
 
-        .about-list i {
-            color: var(--accent);
-        }
+        .about-list i { color: var(--accent); }
 
         /* ================= 6. PROCESS (TIMELINE) ================= */
         .v-timeline {
@@ -585,12 +573,6 @@
         .v-timeline-item:nth-child(odd) .v-timeline-card { margin-right: 50%; }
         .v-timeline-item:nth-child(even) .v-timeline-card { margin-left: 50%; }
 
-        @media (max-width: 768px) {
-            .v-timeline::before { left: 20px; transform: none; }
-            .v-timeline-dot { left: 20px; transform: translateX(-50%); }
-            .v-timeline-card { width: calc(100% - 60px) !important; margin: 0 0 0 60px !important; }
-        }
-
         /* ================= 7. STATS ================= */
         .stats-section {
             background-color: var(--accent);
@@ -622,23 +604,36 @@
             font-family: var(--font-title);
         }
 
-        /* ================= 8. TESTIMONIALS (HORIZONTAL SCROLL) ================= */
-        .testimonials-track {
-            display: flex;
-            gap: 1.5rem;
-            overflow-x: auto;
-            padding: 2rem 0;
-            scroll-behavior: auto; /* Deixa natural para o scroll com mouse wheel */
-            -webkit-overflow-scrolling: touch; /* Suavidade no iOS */
-            
-            /* Remove a barra de rolagem em todos os navegadores */
-            scrollbar-width: none; /* Firefox */
-            -ms-overflow-style: none; /* IE e Edge */
+        /* ================= 8. TESTIMONIALS (HORIZONTAL PINNED SCROLL) ================= */
+        .horizontal-section {
+            height: 400vh; /* Controla a duração do scroll (4 telas) */
+            position: relative;
+            background-color: var(--bg-color); /* Fundo garantido */
         }
 
-        /* Esconde barra no Chrome, Safari e Opera */
-        .testimonials-track::-webkit-scrollbar {
-            display: none; 
+        .sticky-wrapper {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow: hidden; /* Importante para manter tudo contido sem scrollbars */
+        }
+
+        .horizontal-content {
+            display: flex;
+            gap: 2rem;
+            padding-left: max(1.5rem, calc((100vw - 1440px) / 2 + 1.5rem)); /* Respiro inicial alinhado ao container */
+            width: max-content; /* OBRIGATÓRIO: Força a largura total do conteúdo lateral */
+            will-change: transform; /* Otimização de performance */
+        }
+
+        .horizontal-content::after {
+            content: '';
+            width: 10vw; /* Respiro final para o último card não bater na margem direita */
+            display: block;
+            flex-shrink: 0;
         }
 
         .testimonial-card {
@@ -649,10 +644,8 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            height: auto;
-            width: 400px; /* Largura FIXA para o cartão */
-            max-width: 85vw; /* Impede que seja maior que a tela em celulares */
-            flex: 0 0 auto; /* O segredo para NÃO ESTICAR ou encolher */
+            width: 400px; /* Largura Fixa */
+            flex: 0 0 400px; /* OBRIGATÓRIO: Impede distorção (não encolhe e não estica) */
             transition: all 0.4s ease;
         }
         
@@ -660,7 +653,6 @@
             transform: translateY(-5px);
             border-color: rgba(255, 255, 255, 0.1);
             background-color: var(--surface-hover);
-            box-shadow: none;
         }
 
         .testimonial-text {
@@ -917,9 +909,31 @@
             .services-grid {
                 grid-template-columns: 1fr;
             }
-            .process-line {
-                display: none;
+            .v-timeline::before { left: 20px; transform: none; }
+            .v-timeline-dot { left: 20px; transform: translateX(-50%); }
+            .v-timeline-card { width: calc(100% - 60px) !important; margin: 0 0 0 60px !important; }
+            
+            /* Ajustes do Scroll Horizontal para Mobile: 
+               Em telas pequenas, o efeito de scroll de mouse é desligado,
+               dando lugar ao scroll horizontal nativo com o dedo. */
+            .horizontal-section { height: auto !important; padding: 5rem 0 !important;}
+            .sticky-wrapper { position: static !important; height: auto !important; display: block !important; overflow: visible !important; }
+            .horizontal-content { 
+                padding-right: 1.5rem; 
+                overflow-x: auto; 
+                scroll-snap-type: x mandatory; 
+                -webkit-overflow-scrolling: touch; 
+                width: auto !important; 
+                transform: none !important;
+                scrollbar-width: none;
             }
+            .horizontal-content::-webkit-scrollbar { display: none; }
+            .testimonial-card {
+                width: 85vw !important;
+                flex: 0 0 85vw !important;
+                scroll-snap-align: start;
+            }
+            
             section {
                 padding: 5rem 0;
             }
@@ -956,7 +970,7 @@
     <header>
         <div class="container header-content">
             <div class="brand">
-                b<span>.</span>copy
+                <span class="brenda">Brenda</span><span class="copy">Copy</span>
             </div>
             <a href="#contato" class="nav-btn">Falar com a humana</a>
         </div>
@@ -1198,14 +1212,18 @@
         </div>
     </section>
 
-    <!-- 8. TESTIMONIALS -->
-    <section id="depoimentos">
-        <div class="container">
-            <div class="text-center reveal" style="text-align: center; margin-bottom: 4rem;">
-                <h2 class="title-section">Pessoas que não são minha mãe <span class="serif-italic" style="color: var(--accent-pink);">elogiando</span> meu trabalho</h2>
-            </div>
+    <!-- 8. TESTIMONIALS (HORIZONTAL PINNED SCROLL) -->
+    <section class="horizontal-section" id="depoimentos" style="padding: 0;">
+        <div class="sticky-wrapper">
             
-            <div class="testimonials-track reveal" id="testimonials-track">
+            <div class="container">
+                <div class="text-center" style="text-align: center; margin-bottom: 3rem; margin-top: 2rem;">
+                    <h2 class="title-section">Pessoas que não são minha mãe <span class="serif-italic" style="color: var(--accent-pink);">elogiando</span> meu trabalho</h2>
+                </div>
+            </div>
+
+            <div class="horizontal-content" id="testimonials-track">
+                
                 <div class="testimonial-card">
                     <div>
                         <p class="testimonial-text">"A Brenda consegue colocar em palavras exatas o que eu sinto, mas não sei explicar. Os e-mails que ela escreveu tiveram 45% de taxa de abertura. Surreal."</p>
@@ -1322,12 +1340,13 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
 
     <!-- 9. FAQ -->
-    <section style="background-color: var(--surface-color); border-top: 1px solid var(--border-color);" id="faq">
+    <section style="background-color: var(--surface-color); border-top: 1px solid var(--border-color); margin-top: 4rem;" id="faq">
         <div class="container reveal">
             <div class="text-center" style="text-align: center; margin-bottom: 3rem;">
                 <h2 class="title-section"><span class="serif-italic" style="color: var(--accent-purple);">Perguntas</span> que eu cansei de responder no WhatsApp</h2>
@@ -1513,30 +1532,50 @@
             form.style.display = 'block';
         });
 
-        // Interceptação de Scroll Lateral para Testemunhos
-        const testimonialsTrack = document.getElementById('testimonials-track');
-        if (testimonialsTrack) {
-            testimonialsTrack.addEventListener('wheel', (e) => {
-                // Se o scroll for predominantemente vertical
-                if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-                    const maxScrollLeft = testimonialsTrack.scrollWidth - testimonialsTrack.clientWidth;
-                    const isAtStart = testimonialsTrack.scrollLeft <= 0;
-                    const isAtEnd = testimonialsTrack.scrollLeft >= maxScrollLeft - 1; // 1px de tolerância
+        // ==========================================
+        // Scroll Horizontal Fixado (Pinned Scroll) - Corrigido Definitivamente
+        // ==========================================
+        const horizontalSection = document.querySelector('.horizontal-section');
+        const horizontalContent = document.querySelector('.horizontal-content');
+
+        window.addEventListener('scroll', () => {
+            if (!horizontalSection || !horizontalContent) return;
+
+            // Aplica o efeito apenas no Desktop
+            if (window.innerWidth > 992) {
+                // Pegar a distância da secção em relação ao topo do viewport (da janela atual)
+                const rect = horizontalSection.getBoundingClientRect();
+                
+                // O quanto já rolamos para dentro da secção (começa em 0 quando o topo da secção bate no topo da tela)
+                const scrolled = -rect.top;
+                
+                // O máximo que podemos rolar verticalmente enquanto a secção está colada
+                const maxScroll = rect.height - window.innerHeight;
+
+                // Se estamos dentro da área onde o ecrã deve colar
+                if (scrolled >= 0 && scrolled <= maxScroll) {
                     
-                    // Rolando para baixo e ainda não chegou ao final da lista
-                    if (e.deltaY > 0 && !isAtEnd) {
-                        e.preventDefault();
-                        testimonialsTrack.scrollLeft += e.deltaY;
-                    } 
-                    // Rolando para cima e ainda não chegou ao início da lista
-                    else if (e.deltaY < 0 && !isAtStart) {
-                        e.preventDefault();
-                        testimonialsTrack.scrollLeft += e.deltaY;
-                    }
-                    // Se chegou no limite, deixa a página rolar normalmente para cima/baixo
+                    const percentage = scrolled / maxScroll;
+                    const scrollableWidth = horizontalContent.scrollWidth - window.innerWidth;
+                    
+                    // Transforma o scroll vertical num movimento horizontal exato
+                    horizontalContent.style.transform = `translateX(-${percentage * scrollableWidth}px)`;
+                    
+                } 
+                // Se estamos antes da secção (acima dela)
+                else if (scrolled < 0) {
+                    horizontalContent.style.transform = `translateX(0px)`;
+                } 
+                // Se já passámos da secção (abaixo dela)
+                else if (scrolled > maxScroll) {
+                    const scrollableWidth = horizontalContent.scrollWidth - window.innerWidth;
+                    horizontalContent.style.transform = `translateX(-${scrollableWidth}px)`;
                 }
-            }, { passive: false });
-        }
+            } else {
+                // Em dispositivos móveis o CSS cuida do scroll natural de dedo, zera o transform
+                horizontalContent.style.transform = 'translateX(0px)';
+            }
+        });
 
         // Animação de Scroll Reveal
         function reveal() {
